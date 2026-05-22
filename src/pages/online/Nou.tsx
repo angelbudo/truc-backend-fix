@@ -80,10 +80,9 @@ function NovaSala() {
           throw new Error(t("nou.no_free_tables") || "No hi ha mesures lliures a cap sala.");
         }
         if (!chosenSlug) {
-          // Deriva la sala a partir del codi explícit si no l'han passat.
-          const { salaForRoom } = await import("@/online/salaAssignment");
           chosenSlug = salaForRoom({ code: requestedCode });
         }
+
 
 
         const randomMano = Math.floor(Math.random() * 4) as PlayerId;
