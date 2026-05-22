@@ -61,22 +61,30 @@ function NovaSala() {
 
         // Si no hi ha codi explícit (p.ex. botó "crear mesa" de la pantalla
         // principal), busquem el primer placeholder lliure recorrent les
-        // sales en l'ordre fix.
+        // sales en l'ordre fix. Aquesta crida NO ha de ser silenciada: si
+        // falla, no podem garantir un `requestedCode` correcte i la mesa
+        // s'acabaria creant amb un codi aleatori (no reciclable).
         if (!requestedCode) {
-          try {
-            const { rooms } = await listLobbyRooms({ data: {} });
-            for (const slug of SALA_SLUGS) {
-              const firstFreeSlot = firstFreePlaceholderSlot(rooms, slug);
-              if (firstFreeSlot != null) {
-                chosenSlug = slug;
-                requestedCode = placeholderRoomCode(slug, firstFreeSlot);
-                break;
-              }
+          const { rooms } = await listLobbyRooms({ data: {} });
+          for (const slug of SALA_SLUGS) {
+            const firstFreeSlot = firstFreePlaceholderSlot(rooms, slug);
+            if (firstFreeSlot != null) {
+              chosenSlug = slug;
+              requestedCode = placeholderRoomCode(slug, firstFreeSlot);
+              break;
             }
-          } catch {
-            // Si falla, el backend triarà.
           }
         }
+
+        if (!requestedCode) {
+          throw new Error(t("nou.no_free_tables") || "No hi ha mesures lliures a cap sala.");
+        }
+        if (!chosenSlug) {
+          // Deriva la sala a partir del codi explícit si no l'han passat.
+          const { salaForRoom } = await import("@/online/salaAssignment");
+          chosenSlug = salaForRoom({ code: requestedCode });
+        }
+
 
         const randomMano = Math.floor(Math.random() * 4) as PlayerId;
         const res = await createRoom({
