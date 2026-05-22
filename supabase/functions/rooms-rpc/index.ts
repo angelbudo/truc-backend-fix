@@ -1,53 +1,46 @@
 // Edge Function: rooms-rpc
-// Fase 2 + arranque Fase 4 — Truc Valencià.
+// Fase 2 — CRUD de salas, presencia y administración básica.
 //
-// Despliegue:  npx supabase functions deploy rooms-rpc --no-verify-jwt
+// Despliegue:  supabase functions deploy rooms-rpc --no-verify-jwt
 //
 // Secrets requeridos en el dashboard de Supabase:
 //   ADMIN_PASSWORD            (para los RPCs admin*)
 // Inyectados por Supabase:
 //   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
-//
-// NOTA IMPORTANTE: usamos `Deno.serve` (nativo del runtime de Supabase Edge).
-// NO usar `import { serve } from "std/http/server.ts"` — está deprecado y
-// provoca que el runtime no registre el handler, devolviendo 501 a TODO.
 
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.4";
 import { z } from "https://esm.sh/zod@3.23.8";
 
-// ---------------------------------------------------------------------------
-// CORS
-// ---------------------------------------------------------------------------
-const corsHeaders: Record<string, string> = {
+const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-  "Access-Control-Max-Age": "86400",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-function json(body: unknown, status = 200): Response {
+function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 }
 
-// ---------------------------------------------------------------------------
-// Supabase client (service role)
-// ---------------------------------------------------------------------------
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
-const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
-
-const supabase = createClient(SUPABASE_URL, SERVICE_ROLE, {
-  auth: { persistSession: false, autoRefreshToken: false },
-});
+const supabase = createClient(
+  Deno.env.get("SUPABASE_URL")!,
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+  { auth: { persistSession: false } },
+);
 
 // ---------------------------------------------------------------------------
 // Utilidades
 // ---------------------------------------------------------------------------
+
 const PRESENCE_ONLINE_MS = 35_000;
-const nowIso = () => new Date().toISOString();
+
+function nowIso() {
+  return new Date().toISOString();
+}
 
 const CODE_ALPHABET = "ABCDEFGHIJKLMNPQRSTUVWXYZ23456789"; // sin O/0/1/I
 function generateCode(): string {
@@ -171,6 +164,8 @@ function requireAdmin(password: unknown) {
 // ---------------------------------------------------------------------------
 // Handlers — Fase 2
 // ---------------------------------------------------------------------------
+
+// ---- createRoom -----------------------------------------------------------
 const CreateRoomSchema = z.object({
   hostDevice: z.string().min(1),
   hostName: z.string().min(1).max(40),
@@ -224,6 +219,7 @@ async function createRoom(input: z.infer<typeof CreateRoomSchema>) {
   return { code: room.code as string, roomId: room.id as string };
 }
 
+// ---- joinRoom -------------------------------------------------------------
 const JoinRoomSchema = z.object({
   code: z.string().min(6).max(6),
   deviceId: z.string().min(1),
@@ -240,8 +236,11 @@ async function joinRoom(input: z.infer<typeof JoinRoomSchema>) {
   }
 
   const players = await fetchPlayers(room.id);
+
+  // ¿Ya estoy dentro? -> reentrada
   const mine = players.find((p) => p.device_id === input.deviceId);
   if (mine) {
+    // Refresca nombre + last_seen
     await supabase
       .from("room_players")
       .update({ name: input.name, last_seen: nowIso() })
@@ -253,6 +252,7 @@ async function joinRoom(input: z.infer<typeof JoinRoomSchema>) {
   const occupied = new Set(players.map((p) => p.seat));
   const seatKinds = room.seat_kinds;
 
+  // Asiento candidato
   let seat: number | null = null;
   if (
     input.preferredSeat != null &&
@@ -279,6 +279,7 @@ async function joinRoom(input: z.infer<typeof JoinRoomSchema>) {
   });
   if (error) throw new Error(error.message);
 
+  // Marca el seat como humano (por si estaba "empty")
   if (seatKinds[seat] === "empty") {
     const next = [...seatKinds];
     next[seat] = "human";
@@ -288,6 +289,7 @@ async function joinRoom(input: z.infer<typeof JoinRoomSchema>) {
   return { roomId: room.id, code: room.code, seat };
 }
 
+// ---- getRoom --------------------------------------------------------------
 const GetRoomSchema = z.object({
   code: z.string().min(6).max(6),
   deviceId: z.string().min(1).nullable().optional(),
@@ -307,6 +309,7 @@ async function getRoom(input: z.infer<typeof GetRoomSchema>) {
   };
 }
 
+// ---- listLobbyRooms -------------------------------------------------------
 async function listLobbyRooms(_input: unknown) {
   const { data, error } = await supabase
     .from("rooms")
@@ -351,6 +354,7 @@ async function listLobbyRooms(_input: unknown) {
   };
 }
 
+// ---- listMyActiveRooms ----------------------------------------------------
 const ListMyActiveSchema = z.object({ deviceId: z.string().min(1) });
 
 async function listMyActiveRooms(input: z.infer<typeof ListMyActiveSchema>) {
@@ -385,6 +389,7 @@ async function listMyActiveRooms(input: z.infer<typeof ListMyActiveSchema>) {
   };
 }
 
+// ---- heartbeat ------------------------------------------------------------
 const HeartbeatSchema = z.object({
   roomId: z.string().uuid(),
   deviceId: z.string().min(1),
@@ -400,6 +405,7 @@ async function heartbeat(input: z.infer<typeof HeartbeatSchema>) {
   return { ok: true as const };
 }
 
+// ---- leaveRoom ------------------------------------------------------------
 const LeaveRoomSchema = HeartbeatSchema;
 
 async function leaveRoom(input: z.infer<typeof HeartbeatSchema>) {
@@ -414,11 +420,13 @@ async function leaveRoom(input: z.infer<typeof HeartbeatSchema>) {
 
   const remaining = await fetchPlayers(room.id);
 
+  // Si no queda nadie humano, abandona y borra la sala (limpieza inmediata).
   if (remaining.length === 0) {
     await supabase.from("rooms").delete().eq("id", room.id);
     return { ok: true as const, abandoned: true };
   }
 
+  // Si se va el host, traspasa a otro humano cualquiera.
   if (room.host_device === input.deviceId) {
     const newHost = remaining[0]!;
     await supabase
@@ -429,6 +437,7 @@ async function leaveRoom(input: z.infer<typeof HeartbeatSchema>) {
   return { ok: true as const, abandoned: false };
 }
 
+// ---- setRoomSettings ------------------------------------------------------
 const SetSettingsSchema = z.object({
   roomId: z.string().uuid(),
   deviceId: z.string().min(1),
@@ -454,6 +463,7 @@ async function setRoomSettings(input: z.infer<typeof SetSettingsSchema>) {
   return { ok: true as const };
 }
 
+// ---- setSeatKind ----------------------------------------------------------
 const SetSeatKindSchema = z.object({
   roomId: z.string().uuid(),
   deviceId: z.string().min(1),
@@ -467,6 +477,7 @@ async function setSeatKind(input: z.infer<typeof SetSeatKindSchema>) {
   if (room.host_device !== input.deviceId) throw new Error("forbidden");
   if (room.status !== "lobby") throw new Error("not_in_lobby");
 
+  // Si hay un humano sentado, no se puede cambiar el tipo (que se vaya antes).
   const players = await fetchPlayers(room.id);
   const occupied = players.find((p) => p.seat === input.seat);
   if (occupied && input.kind !== "human") {
@@ -483,6 +494,7 @@ async function setSeatKind(input: z.infer<typeof SetSeatKindSchema>) {
   return { ok: true as const };
 }
 
+// ---- updatePlayerName -----------------------------------------------------
 const UpdateNameSchema = z.object({
   roomId: z.string().uuid(),
   deviceId: z.string().min(1),
@@ -499,6 +511,7 @@ async function updatePlayerName(input: z.infer<typeof UpdateNameSchema>) {
   return { ok: true as const };
 }
 
+// ---- adminCloseRoom -------------------------------------------------------
 const AdminCloseSchema = z.object({
   roomId: z.string().uuid(),
   password: z.string().min(1),
@@ -511,8 +524,9 @@ async function adminCloseRoom(input: z.infer<typeof AdminCloseSchema>) {
 }
 
 // ---------------------------------------------------------------------------
-// Motor — Fase 4 (inicio)
+// Motor mínimo del juego — Fase 4 (inicio)
 // ---------------------------------------------------------------------------
+
 type Suit = "oros" | "copes" | "espases" | "bastos";
 type Rank = 1 | 3 | 4 | 5 | 6 | 7;
 interface Card { suit: Suit; rank: Rank; id: string }
@@ -520,14 +534,15 @@ interface Card { suit: Suit; rank: Rank; id: string }
 const ENGINE_SUITS: Suit[] = ["oros", "copes", "espases", "bastos"];
 const ENGINE_RANKS: Rank[] = [1, 3, 4, 5, 6, 7];
 
-// Mazo del Truc Valencià: 22 cartas.
-//   - 3, 4, 5, 6, 7 en los cuatro palos (20)
-//   - 1 de espases y 1 de bastos (2)
-//   Eliminadas: 2, 8, 9, 10, 11, 12.
+// Mazo de Truc Valencià: 22 cartas.
+//   - 3, 4, 5, 6, 7 en los cuatro palos (20 cartas)
+//   - 1 de espases y 1 de bastos (2 cartas)
+//   Se eliminan por completo: 2, 8, 9, 10, 11, 12.
 function buildDeck(): Card[] {
   const deck: Card[] = [];
   for (const suit of ENGINE_SUITS) {
     for (const rank of ENGINE_RANKS) {
+      // El 1 sólo existe en espases y bastos.
       if (rank === 1 && suit !== "espases" && suit !== "bastos") continue;
       deck.push({ suit, rank, id: `${rank}-${suit}` });
     }
@@ -544,6 +559,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+// ---- startMatch -----------------------------------------------------------
 const StartMatchSchema = z.object({
   roomId: z.string().uuid(),
   deviceId: z.string().min(1),
@@ -555,6 +571,7 @@ async function startMatch(input: z.infer<typeof StartMatchSchema>) {
   if (room.host_device !== input.deviceId) throw new Error("forbidden");
   if (room.status !== "lobby") throw new Error("not_in_lobby");
 
+  // Verifica que los 4 asientos están cubiertos (humano sentado o bot).
   const players = await fetchPlayers(room.id);
   const occupied = new Set(players.map((p) => p.seat));
   for (let i = 0; i < 4; i++) {
@@ -564,6 +581,7 @@ async function startMatch(input: z.infer<typeof StartMatchSchema>) {
     if (room.seat_kinds[i] === "empty") throw new Error("seat_empty:" + i);
   }
 
+  // Reparte 3 cartas a cada asiento.
   const deck = shuffle(buildDeck());
   const hands: Record<number, Card[]> = { 0: [], 1: [], 2: [], 3: [] };
   let idx = 0;
@@ -588,7 +606,7 @@ async function startMatch(input: z.infer<typeof StartMatchSchema>) {
     hands,
     tricks: [{ cards: [] as { seat: number; card: Card }[] }],
     deckRemaining: remaining,
-    score: { team02: 0, team13: 0 },
+    score: { team02: 0, team13: 0 }, // equipos: 0+2 vs 1+3
     targetCames: room.target_cames,
     targetCama: room.target_cama,
     envit: { state: "idle" as const, value: 0 },
@@ -612,8 +630,16 @@ async function startMatch(input: z.infer<typeof StartMatchSchema>) {
 }
 
 // ---------------------------------------------------------------------------
+// Stubs para fases siguientes
+// ---------------------------------------------------------------------------
+const notImplemented = async () => {
+  throw new Error("not_implemented");
+};
+
+// ---------------------------------------------------------------------------
 // Router
 // ---------------------------------------------------------------------------
+
 type Handler = (data: unknown) => Promise<unknown>;
 
 function withSchema<S extends z.ZodTypeAny>(
@@ -623,33 +649,16 @@ function withSchema<S extends z.ZodTypeAny>(
   return async (raw) => {
     const parsed = schema.safeParse(raw);
     if (!parsed.success) {
-      let detail: unknown = "invalid";
-      try {
-        detail = parsed.error.flatten().fieldErrors;
-      } catch {
-        /* ignore */
-      }
-      let detailStr = "invalid";
-      try {
-        detailStr = JSON.stringify(detail);
-      } catch {
-        detailStr = String(detail);
-      }
-      throw new Error("invalid_input:" + detailStr);
+      throw new Error(
+        "invalid_input:" + JSON.stringify(parsed.error.flatten().fieldErrors),
+      );
     }
     return fn(parsed.data);
   };
 }
 
-// Devuelve 200 OK con `ok:false` para que el frontend no confunda la
-// respuesta de "stub" con un fallo de runtime de Supabase (que sí es 501).
-const notImplemented: Handler = async () => ({
-  ok: false as const,
-  error: "not_implemented",
-});
-
 const handlers: Record<string, Handler> = {
-  ping: async () => ({ ok: true as const, version: "phase-4-init" }),
+  ping: async () => ({ ok: true as const, version: "phase-2" }),
 
   // Fase 2
   createRoom: withSchema(CreateRoomSchema, createRoom),
@@ -664,7 +673,7 @@ const handlers: Record<string, Handler> = {
   updatePlayerName: withSchema(UpdateNameSchema, updatePlayerName),
   adminCloseRoom: withSchema(AdminCloseSchema, adminCloseRoom),
 
-  // Fase 3
+  // Fase 3 — chats y moderación
   sendChatPhrase: notImplemented,
   sendTextMessage: notImplemented,
   flagPlayerInChat: notImplemented,
@@ -672,7 +681,7 @@ const handlers: Record<string, Handler> = {
   adminDecideChatFlag: notImplemented,
   adminListChatFlagAudit: notImplemented,
 
-  // Fase 4
+  // Fase 4 — motor del juego
   startMatch: withSchema(StartMatchSchema, startMatch),
   submitAction: notImplemented,
   setPaused: notImplemented,
@@ -681,15 +690,13 @@ const handlers: Record<string, Handler> = {
   respondProposal: notImplemented,
   cancelProposal: notImplemented,
 
-  // Fase 5
+  // Fase 5 — bots
   advanceBots: notImplemented,
 };
 
 function resolveFn(fn: string): string {
   const normalized = fn.replace(/[-_\s]/g, "").toLowerCase();
-  for (const key of Object.keys(handlers)) {
-    if (key.toLowerCase() === normalized) return key;
-  }
+  if (normalized === "startmatch") return "startMatch";
   return fn;
 }
 
@@ -698,69 +705,36 @@ const RequestSchema = z.object({
   data: z.unknown().optional(),
 });
 
-// ---------------------------------------------------------------------------
-// HTTP entrypoint — Deno.serve (nativo del runtime de Supabase Edge)
-// ---------------------------------------------------------------------------
-Deno.serve(async (req: Request): Promise<Response> => {
+serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+  if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405);
+
+  let body: unknown;
   try {
-    // Preflight CORS
-    if (req.method === "OPTIONS") {
-      return new Response("ok", { status: 200, headers: corsHeaders });
-    }
+    body = await req.json();
+  } catch {
+    return json({ error: "invalid_json" }, 400);
+  }
 
-    // Health check por GET (útil para probar desde el navegador).
-    if (req.method === "GET") {
-      return json({
-        ok: true,
-        service: "rooms-rpc",
-        version: "phase-4-init",
-        time: nowIso(),
-      });
-    }
+  const parsed = RequestSchema.safeParse(body);
+  if (!parsed.success) return json({ error: "invalid_body" }, 400);
 
-    if (req.method !== "POST") {
-      return json({ ok: false, error: "method_not_allowed" }, 405);
-    }
+  const { fn, data } = parsed.data;
+  const handlerKey = resolveFn(fn);
+  const handler = handlers[handlerKey];
+  if (!handler) return json({ error: `unknown_fn:${fn}` }, 400);
 
-    // Validación temprana de configuración crítica.
-    if (!SUPABASE_URL || !SERVICE_ROLE) {
-      return json({ ok: false, error: "missing_env_supabase" }, 500);
-    }
-
-    let body: unknown;
-    try {
-      const raw = await req.text();
-      body = raw.length === 0 ? {} : JSON.parse(raw);
-    } catch {
-      return json({ ok: false, error: "invalid_json" }, 400);
-    }
-
-    const parsed = RequestSchema.safeParse(body);
-    if (!parsed.success) return json({ ok: false, error: "invalid_body" }, 400);
-
-    const { fn, data } = parsed.data;
-    const handlerKey = resolveFn(fn);
-    const handler = handlers[handlerKey];
-    if (!handler) {
-      return json({ ok: false, error: `unknown_fn:${fn}` }, 400);
-    }
-
-    try {
-      const result = await handler(data);
-      return json(result ?? { ok: true });
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      const status = msg === "forbidden"
-        ? 403
-        : msg === "room_not_found"
-        ? 404
-        : 400;
-      return json({ ok: false, error: msg }, status);
-    }
-  } catch (fatal) {
-    // Cualquier excepción no controlada se devuelve como JSON 500.
-    const msg = fatal instanceof Error ? fatal.message : String(fatal);
-    console.error("[rooms-rpc] fatal error:", msg);
-    return json({ ok: false, error: "fatal:" + msg }, 500);
+  try {
+    const result = await handler(data);
+    return json(result ?? { ok: true });
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    const status = msg === "not_implemented" ? 501
+      : msg === "forbidden" ? 403
+      : msg === "room_not_found" ? 404
+      : 400;
+    return json({ error: msg }, status);
   }
 });
