@@ -1,0 +1,291 @@
+import { Link, useNavigate } from "@/lib/router-shim";
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, LogOut } from "lucide-react";
+import { getLanguage } from "@/i18n/useT";
+import { ShareAppButton } from "@/components/ShareAppButton";
+
+const PoliticaPrivacitat = () => {
+  const navigate = useNavigate();
+  const isEs = getLanguage() === "es";
+
+  useEffect(() => {
+    document.title = isEs
+      ? "Política de Privacidad · Truc Valencià"
+      : "Política de Privacitat · Truc Valencià";
+    const desc = isEs
+      ? "Política de Privacidad de Truc Valencià: datos tratados, finalidad y cómo ejercer tus derechos ARCO/ARSULIPO."
+      : "Política de Privacitat de Truc Valencià: dades tractades, finalitat i com exercir els teus drets ARCO/ARSULIPO.";
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.setAttribute("name", "description");
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", desc);
+  }, [isEs]);
+
+  const lastUpdate = isEs ? "30 de abril de 2026" : "30 d'abril de 2026";
+  const backLabel = isEs ? "Volver al inicio" : "Tornar a inici";
+
+  return (
+    <main className="min-h-screen px-5 py-8 bg-background text-foreground">
+      <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
+        <header className="flex items-center justify-between gap-3">
+          <p className="text-xs text-muted-foreground">{isEs ? "Actualizada" : "Actualitzada"}: {lastUpdate}</p>
+          <div className="flex items-center justify-between">
+            <ShareAppButton />
+            <Button
+              onClick={() => navigate("/")}
+              size="sm"
+              variant="outline"
+              className="h-8 w-8 p-0 border-foreground/80 text-foreground hover:bg-foreground/10"
+              aria-label={backLabel}
+              title={backLabel}
+            >
+              <LogOut className="w-4 h-4" />
+            </Button>
+          </div>
+        </header>
+
+        <article className="prose prose-sm md:prose-base max-w-none text-foreground">
+          <h1 className="font-display font-black italic text-gold text-3xl md:text-4xl normal-case mb-2">
+            {isEs ? "Política de Privacidad" : "Política de Privacitat"}
+          </h1>
+
+          {isEs ? (
+            <>
+              <p className="text-muted-foreground">
+                Esta política explica qué datos trata la aplicación <strong>Truc Valencià</strong>,
+                con qué finalidad, durante cuánto tiempo y cómo puedes ejercer tus derechos.
+              </p>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">1. Responsable del tratamiento</h2>
+                <p>
+                  Esta aplicación es un proyecto personal sin ánimo de lucro. Si quieres ejercer tus
+                  derechos o tienes cualquier duda sobre privacidad, puedes contactar a través del
+                  canal de incidencias indicado en la página de publicación de la app.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Qué datos tratamos</h2>
+                <p>
+                  <strong>No pedimos nombre real, email, teléfono ni ningún dato de contacto.</strong>{" "}
+                  No hay registro de usuarios. Los datos tratados son mínimos y, en su mayoría, no
+                  salen de tu dispositivo:
+                </p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Sobrenombre (alias)</strong>: el texto que tú mismo escribes para identificarte en la mesa. Puedes poner lo que quieras; no se verifica ni se asocia a ninguna identidad real.</li>
+                  <li><strong>Identificador anónimo de dispositivo</strong>: una cadena aleatoria generada por el navegador la primera vez que abres la app. Sirve para saber qué silla ocupas en una partida y permitir volver si cierras y abres la app.</li>
+                  <li><strong>Preferencias del juego</strong>: dificultad de los bots, idioma, tipo de cama, etc. Se guardan <strong>solo en tu dispositivo</strong> (<code>localStorage</code>).</li>
+                  <li><strong>Estadísticas de partida</strong>: contadores para adaptar el comportamiento de los bots (envites aceptados, frecuencia de faroles, etc.). Anónimas y asociadas al identificador anónimo del dispositivo.</li>
+                  <li><strong>Estado de la partida online</strong>: cartas, acciones y mensajes del chat de la sala. Necesario para que el resto de jugadores vea la partida en tiempo real. Se borra automáticamente al finalizar (ver apartado 5).</li>
+                </ul>
+                <p className="text-sm text-muted-foreground">No usamos cookies de seguimiento, ni publicidad, ni herramientas de analítica de terceros.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Finalidad y base legal</h2>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Finalidad</strong>: que puedas jugar al Truc, solo contra bots u online con amigos, mantener tus preferencias y permitir que los bots se adapten a tu estilo de juego.</li>
+                  <li><strong>Base legal</strong>: ejecución del servicio solicitado por ti (art. 6.1.b RGPD). Al no haber datos identificativos, no se trata ninguna categoría especial de datos.</li>
+                </ul>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Quién puede acceder a los datos</h2>
+                <p>
+                  Las preferencias y estadísticas solo son accesibles <strong>desde tu dispositivo</strong>. Para
+                  el juego online, el estado de la sala lo procesa nuestro proveedor de infraestructura
+                  (servidor y base de datos) para hacer llegar las jugadas al resto de participantes.{" "}
+                  <strong>No cedemos datos a terceros con fines comerciales</strong> ni los usamos para
+                  perfilado publicitario.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Cuánto tiempo los guardamos</h2>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Datos en tu dispositivo</strong>: hasta que tú los borres (botón "Borrar datos" de la app, o borrando los datos del navegador).</li>
+                  <li><strong>Salas online activas</strong>: las salas inactivas durante 15 minutos se marcan como abandonadas y se eliminan automáticamente 1 hora después.</li>
+                  <li><strong>Estadísticas anónimas para bots</strong>: se conservan mientras exista el identificador anónimo del dispositivo. Se pueden eliminar a petición tuya aportando dicho identificador.</li>
+                </ul>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">6. Tus derechos (ARCO / ARSULIPO)</h2>
+                <p>Aunque tratamos datos mínimos y pseudonimizados, tienes derecho a:</p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Acceso (A)</strong>: saber qué tratamos sobre tu identificador anónimo.</li>
+                  <li><strong>Rectificación (R)</strong>: corregir datos inexactos (p. ej., el sobrenombre).</li>
+                  <li><strong>Cancelación / Supresión (C / S)</strong>: pedir que eliminemos las estadísticas asociadas a tu identificador.</li>
+                  <li><strong>Oposición (O)</strong>: oponerte al tratamiento concreto.</li>
+                  <li><strong>Limitación del tratamiento (LI)</strong>: pedir que dejemos de tratar los datos temporalmente.</li>
+                  <li><strong>Portabilidad (P)</strong>: recibir tus datos en un formato estructurado (JSON).</li>
+                  <li><strong>No ser objeto de decisiones automatizadas (O)</strong>: los bots adaptan su juego, pero no toman decisiones con efectos jurídicos sobre ti.</li>
+                </ul>
+                <p>
+                  <strong>Cómo ejercerlos</strong>: la forma más rápida es desde el propio dispositivo
+                  (borrar datos del navegador o de la app). Si quieres que borremos datos del lado servidor,
+                  contacta indicando tu identificador anónimo de dispositivo (lo encontrarás en{" "}
+                  <em>Configuración → Diagnóstico</em>). Responderemos en un plazo máximo de un mes.
+                </p>
+                <p>
+                  Tienes derecho a presentar una reclamación ante la <strong>Agencia Española de
+                  Protección de Datos</strong> (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="underline text-primary">www.aepd.es</a>)
+                  si consideras que el tratamiento de tus datos no es correcto.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Menores de edad</h2>
+                <p>
+                  La app no está dirigida específicamente a menores. Si eres padre, madre o tutor y crees
+                  que un menor ha facilitado datos, contáctanos y los eliminaremos inmediatamente. Al no
+                  pedir datos identificativos, no es técnicamente posible verificar la edad de los usuarios.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">8. Seguridad</h2>
+                <p>
+                  Aplicamos medidas técnicas razonables: comunicaciones cifradas (HTTPS), acceso restringido
+                  a la base de datos mediante políticas de seguridad a nivel de fila (RLS) y revocación de privilegios.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">9. Cambios en esta política</h2>
+                <p>
+                  Si modificamos esta política, actualizaremos la fecha del encabezado y haremos visible un
+                  aviso en la app. La versión vigente siempre es la accesible desde esta página.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">10. Borrado de la cuenta y de los datos (Google Play)</h2>
+                <p>
+                  De acuerdo con la política de Google Play sobre borrado de datos de usuario, ofrecemos dos
+                  caminos equivalentes para solicitar el borrado de todos los datos asociados a tu dispositivo:
+                </p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Dentro de la app</strong>: <em>Configuración → Privacidad y datos → Borrar mis datos</em>. Borra datos del servidor y locales en un solo paso.</li>
+                  <li><strong>Página pública</strong>: <a href="/esborrar-dades" className="underline text-primary">/esborrar-dades</a>. Permite solicitarlo desde un navegador, aunque ya no tengas la app instalada, indicando el identificador anónimo del dispositivo.</li>
+                </ul>
+                <p className="text-sm text-muted-foreground">
+                  Categorías de datos procesados según el Data Safety form de Google Play: <em>App activity</em>{" "}
+                  (eventos de partida) y <em>User-generated content</em> (sobrenombre y mensajes de chat). No se
+                  recogen datos de localización, contactos, ficheros, identificadores publicitarios ni datos financieros.
+                </p>
+              </section>
+            </>
+          ) : (
+            <>
+              <p className="text-muted-foreground">
+                Aquesta política explica quines dades tracta l'aplicació{" "}
+                <strong>Truc Valencià</strong>, amb quina finalitat, durant quant de
+                temps i com pots exercir els teus drets.
+              </p>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">1. Responsable del tractament</h2>
+                <p>
+                  Aquesta aplicació és un projecte personal sense ànim de lucre. Si vols exercir els
+                  teus drets o tens qualsevol dubte sobre privacitat, pots contactar a través del
+                  canal d'incidències indicat a la pàgina de publicació de l'app.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Quines dades tractem</h2>
+                <p>
+                  <strong>No demanem nom real, email, telèfon ni cap dada de contacte.</strong> No hi ha
+                  registre d'usuaris. Les dades que es tracten són mínimes i, en la seua majoria, no surten
+                  del teu dispositiu:
+                </p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Sobrenom (àlies)</strong>: el text que tu mateix escrius per identificar-te a la mesa.</li>
+                  <li><strong>Identificador anònim de dispositiu</strong>: cadena aleatòria per saber quina cadira ocupes.</li>
+                  <li><strong>Preferències del joc</strong>: es guarden <strong>només al teu dispositiu</strong>.</li>
+                  <li><strong>Estadístiques de partida</strong>: anònimes, per adaptar el comportament dels bots.</li>
+                  <li><strong>Estat de la partida online</strong>: necessari perquè la resta de jugadors veja la partida en temps real.</li>
+                </ul>
+                <p className="text-sm text-muted-foreground">No fem servir cookies de seguiment, ni publicitat, ni eines d'analítica de tercers.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Finalitat i base legal</h2>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Finalitat</strong>: que pugues jugar al Truc, sol contra bots o online amb amics.</li>
+                  <li><strong>Base legal</strong>: execució del servei sol·licitat per tu (art. 6.1.b RGPD).</li>
+                </ul>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Qui pot accedir a les dades</h2>
+                <p>
+                  Les preferències i estadístiques només són accessibles <strong>des del teu dispositiu</strong>.
+                  <strong> No cedim dades a tercers per a fins comercials</strong>.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Quant de temps les guardem</h2>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Dades al teu dispositiu</strong>: fins que tu les esborres.</li>
+                  <li><strong>Sales online actives</strong>: 15 min inactives → arxivades; 1 h després → eliminades.</li>
+                  <li><strong>Estadístiques anònimes per a bots</strong>: mentre l'identificador anònim existisca.</li>
+                </ul>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">6. Els teus drets (ARCO / ARSULIPO)</h2>
+                <p>Tens dret d'accés, rectificació, cancel·lació, oposició, limitació, portabilitat i a no ser objecte de decisions automatitzades.</p>
+                <p>
+                  Tens dret a presentar una reclamació davant l'<strong>Agencia Española de Protección de Datos</strong> (
+                  <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="underline text-primary">www.aepd.es</a>).
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Menors d'edat</h2>
+                <p>L'app no està dirigida específicament a menors.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">8. Seguretat</h2>
+                <p>Comunicacions xifrades (HTTPS), polítiques RLS i revocació de privilegis.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">9. Canvis en aquesta política</h2>
+                <p>Si modifiquem aquesta política, actualitzarem la data i farem visible un avís a l'app.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">10. Esborrat del compte i de les dades (Google Play)</h2>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Dins de l'app</strong>: <em>Configuració → Privacitat i dades → Esborrar les meues dades</em>.</li>
+                  <li><strong>Pàgina pública</strong>: <a href="/esborrar-dades" className="underline text-primary">/esborrar-dades</a>.</li>
+                </ul>
+              </section>
+            </>
+          )}
+        </article>
+
+        <footer className="pt-6 border-t border-border">
+          <Button asChild variant="outline" className="w-full border-2">
+            <Link to="/">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {isEs ? "Volver al inicio" : "Tornar a l'inici"}
+            </Link>
+          </Button>
+        </footer>
+      </div>
+    </main>
+  );
+};
+
+export default PoliticaPrivacitat;
