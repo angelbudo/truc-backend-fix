@@ -103,7 +103,8 @@ function Sala() {
   useEffect(() => {
     if (!roomIdForUnload || !isHostForUnload || roomStatusForUnload === "finished" || roomStatusForUnload === "abandoned") return;
     const handleUnload = () => {
-      const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/rooms-rpc`;
+      const baseUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? "https://sgonrrtqdcwyajsmufhs.supabase.co";
+      const url = `${baseUrl}/functions/v1/rooms-rpc`;
       const body = JSON.stringify({ fn: "leaveRoom", data: { roomId: roomIdForUnload, deviceId } });
       try {
         navigator.sendBeacon(url, new Blob([body], { type: "application/json" }));
