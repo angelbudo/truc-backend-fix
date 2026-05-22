@@ -64,15 +64,14 @@ function NovaSala() {
         } else {
           const { rooms } = await listLobbyRooms({ data: {} });
           for (const slug of SALA_SLUGS) {
-            // Recorrem TOTS els slots lliures de la sala en ordre, no només el primer.
             const occupied = new Set<number>();
             for (const room of rooms) {
-              const sIdx = (await import("@/online/salaAssignment")).placeholderSlotIndex(slug, room.code);
-              if (sIdx != null && (await import("@/online/salaAssignment")).isRoomVisibleInSala(room, slug)) {
+              const sIdx = placeholderSlotIndex(slug, room.code);
+              if (sIdx != null && isRoomVisibleInSala(room, slug)) {
                 occupied.add(sIdx);
               }
             }
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < VISIBLE_TABLES_PER_SALA; i++) {
               if (!occupied.has(i)) candidates.push({ code: placeholderRoomCode(slug, i), sala: slug });
             }
           }
