@@ -6,7 +6,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 // Avatars 3D estil Pixar generats amb IA i pujats al bucket public "avatars/presets"
-const AVATAR_BASE = "https://qedxfddrlacmkkplmumf.supabase.co/storage/v1/object/public/avatars/presets";
+const SUPABASE_PUBLIC_URL =
+  (import.meta.env.VITE_SUPABASE_URL as string | undefined) ??
+  "https://sgonrrtqdcwyajsmufhs.supabase.co";
+const AVATAR_BASE = `${SUPABASE_PUBLIC_URL}/storage/v1/object/public/avatars/presets`;
 export const PRESET_AVATARS: string[] = [
   1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,23,24,25,26,27,28,29,30,
 ].map((n) => `${AVATAR_BASE}/avatar-${n}.png`);
