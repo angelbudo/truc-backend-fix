@@ -183,28 +183,33 @@ async function createRoom(input: z.infer<typeof CreateRoomSchema>) {
   const seatKinds = [...input.seatKinds];
   if (seatKinds[input.hostSeat] !== "human") seatKinds[input.hostSeat] = "human";
 
-  let code = input.requestedCode?.toUpperCase();
-  if (code) {
-    const exists = await fetchRoomByCode(code);
-    if (exists) {
-      // Si la mesa existent ja no és jugable (finished/abandoned) o és
-      // una mesa "lobby" buida (sense jugadors), reciclem el codi
-      // renombrant l'antiga amb un sufix temporal, perquè la nova mesa
-      // mantingui el mateix codi "Taula XXXXXX" del placeholder.
-      const players = await fetchPlayers(exists.id);
-      const recyclable =
-        exists.status === "finished" ||
-        exists.status === "abandoned" ||
-        (exists.status === "lobby" && players.length === 0);
-      if (recyclable) {
-        const archived = `_${Date.now().toString(36).toUpperCase()}`.slice(0, 6);
-        await supabase.from("rooms").update({ code: archived }).eq("id", exists.id);
-      } else {
-        code = undefined;
-      }
-    }
+  // Els codis de mesa són SEMPRE codis fixos de placeholder ("Taula XXXXXX")
+  // calculats al frontend amb `placeholderRoomCode(sala, slot)`. Mai s'ha
+  // de generar cap codi aleatori: si no arriba `requestedCode`, és un bug
+  // del client i preferim fallar abans que crear una mesa amb codi nou.
+  const code = input.requestedCode?.toUpperCase();
+  if (!code) {
+    throw new Error("missing_requested_code");
   }
-  if (!code) code = await generateUniqueCode();
+
+  const exists = await fetchRoomByCode(code);
+  if (exists) {
+    // Si la mesa existent ja no és jugable (finished/abandoned) o és una
+    // mesa "lobby" buida (sense jugadors), reciclem la fila esborrant-la
+    // perquè la nova mesa ocupi exactament el mateix codi "Taula XXXXXX".
+    const players = await fetchPlayers(exists.id);
+    const recyclable =
+      exists.status === "finished" ||
+      exists.status === "abandoned" ||
+      (exists.status === "lobby" && players.length === 0);
+    if (!recyclable) {
+      // La mesa fixa ja està ocupada: el client ha de tornar a calcular
+      // el primer slot lliure i reintentar amb un altre codi.
+      throw new Error("code_in_use");
+    }
+    await supabase.from("room_players").delete().eq("room_id", exists.id);
+    await supabase.from("rooms").delete().eq("id", exists.id);
+  }
 
   const { data: room, error } = await supabase
     .from("rooms")
