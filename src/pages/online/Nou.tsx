@@ -50,57 +50,66 @@ function NovaSala() {
 
     (async () => {
       try {
-        // Si la pantalla anterior (lobby de la sala) ja ens ha indicat el
-        // codi exacte de la mesa placeholder a crear, l'usem tal qual: el
-        // codi de la mesa ha de ser exactament el que es veu al lobby.
         const explicitCode = (searchParams.get("code") || "").trim().toUpperCase();
         const explicitSala = (searchParams.get("sala") || "").trim() || undefined;
 
-        let chosenSlug: string | undefined = explicitSala;
-        let requestedCode: string | undefined = explicitCode || undefined;
-
-        // Si no hi ha codi explícit (p.ex. botó "crear mesa" de la pantalla
-        // principal), busquem el primer placeholder lliure recorrent les
-        // sales en l'ordre fix. Aquesta crida NO ha de ser silenciada: si
-        // falla, no podem garantir un `requestedCode` correcte i la mesa
-        // s'acabaria creant amb un codi aleatori (no reciclable).
-        if (!requestedCode) {
+        // Construïm la llista de candidats (codi + sala) en l'ordre fix de
+        // sales i slots. Mai cap codi aleatori: només codis "Taula XXXXXX"
+        // predefinits. Si el servidor ens diu que el primer està ocupat
+        // (`code_in_use`), provem el següent.
+        type Candidate = { code: string; sala: string };
+        const candidates: Candidate[] = [];
+        if (explicitCode) {
+          candidates.push({ code: explicitCode, sala: explicitSala ?? salaForRoom({ code: explicitCode }) });
+        } else {
           const { rooms } = await listLobbyRooms({ data: {} });
           for (const slug of SALA_SLUGS) {
-            const firstFreeSlot = firstFreePlaceholderSlot(rooms, slug);
-            if (firstFreeSlot != null) {
-              chosenSlug = slug;
-              requestedCode = placeholderRoomCode(slug, firstFreeSlot);
-              break;
+            // Recorrem TOTS els slots lliures de la sala en ordre, no només el primer.
+            const occupied = new Set<number>();
+            for (const room of rooms) {
+              const sIdx = (await import("@/online/salaAssignment")).placeholderSlotIndex(slug, room.code);
+              if (sIdx != null && (await import("@/online/salaAssignment")).isRoomVisibleInSala(room, slug)) {
+                occupied.add(sIdx);
+              }
+            }
+            for (let i = 0; i < 12; i++) {
+              if (!occupied.has(i)) candidates.push({ code: placeholderRoomCode(slug, i), sala: slug });
             }
           }
         }
 
-        if (!requestedCode) {
+        if (candidates.length === 0) {
           throw new Error(t("nou.no_free_tables") || "No hi ha mesures lliures a cap sala.");
         }
-        if (!chosenSlug) {
-          chosenSlug = salaForRoom({ code: requestedCode });
-        }
-
-
 
         const randomMano = Math.floor(Math.random() * 4) as PlayerId;
-        const res = await createRoom({
-          data: {
-            hostDevice: deviceId,
-            hostName: name,
-            targetCames: DEFAULT_TARGET_CAMES,
-            targetCama: DEFAULT_TARGET_CAMA,
-            turnTimeoutSec: DEFAULT_TURN_TIMEOUT_SEC,
-            initialMano: randomMano,
-            seatKinds: DEFAULT_SEAT_KINDS,
-            hostSeat: DEFAULT_HOST_SEAT,
-            salaSlug: chosenSlug,
-            requestedCode,
-          },
-        });
-        navigate(`/online/sala/${res.code}`);
+        let lastErr: unknown = null;
+        for (const cand of candidates) {
+          try {
+            const res = await createRoom({
+              data: {
+                hostDevice: deviceId,
+                hostName: name,
+                targetCames: DEFAULT_TARGET_CAMES,
+                targetCama: DEFAULT_TARGET_CAMA,
+                turnTimeoutSec: DEFAULT_TURN_TIMEOUT_SEC,
+                initialMano: randomMano,
+                seatKinds: DEFAULT_SEAT_KINDS,
+                hostSeat: DEFAULT_HOST_SEAT,
+                salaSlug: cand.sala,
+                requestedCode: cand.code,
+              },
+            });
+            navigate(`/online/sala/${res.code}`);
+            return;
+          } catch (e) {
+            const msg = e instanceof Error ? e.message : String(e);
+            lastErr = e;
+            if (msg.includes("code_in_use")) continue;
+            throw e;
+          }
+        }
+        throw lastErr instanceof Error ? lastErr : new Error(t("nou.no_free_tables") || "No hi ha mesures lliures a cap sala.");
       } catch (e) {
         setError(e instanceof Error ? e.message : t("nou.unexpected_error"));
         startedRef.current = false;
