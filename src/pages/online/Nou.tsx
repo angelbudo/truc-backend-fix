@@ -7,7 +7,7 @@ import { createRoom, listLobbyRooms } from "@/online/rooms.functions";
 import type { PlayerId } from "@/game/types";
 import type { SeatKind } from "@/online/types";
 import { Loader2, LogOut, Settings } from "lucide-react";
-import { SALA_SLUGS, firstFreePlaceholderSlot, placeholderRoomCode } from "@/online/salaAssignment";
+import { SALA_SLUGS, firstFreePlaceholderSlot, placeholderRoomCode, salaForRoom } from "@/online/salaAssignment";
 import { useT } from "@/i18n/useT";
 import { ShareAppButton } from "@/components/ShareAppButton";
 
