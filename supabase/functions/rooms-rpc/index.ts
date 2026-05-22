@@ -581,37 +581,42 @@ async function startMatch(input: z.infer<typeof StartMatchSchema>) {
     if (room.seat_kinds[i] === "empty") throw new Error("seat_empty:" + i);
   }
 
-  // Reparte 3 cartas a cada asiento.
+  // Reparte 12 cartas (3 por jugador) siguiendo el orden de la mano.
   const deck = shuffle(buildDeck());
   const hands: Record<number, Card[]> = { 0: [], 1: [], 2: [], 3: [] };
-  let idx = 0;
-  for (let n = 0; n < 3; n++) {
-    for (let seat = 0; seat < 4; seat++) {
-      hands[seat]!.push(deck[idx++]!);
-    }
+  const mano = room.initial_mano as 0 | 1 | 2 | 3;
+  const dealer = ((mano + 3) % 4) as 0 | 1 | 2 | 3;
+  let p = mano;
+  for (let i = 0; i < 12; i++) {
+    hands[p]!.push(deck[i]!);
+    p = ((p + 1) % 4) as 0 | 1 | 2 | 3;
   }
-  const remaining = deck.slice(idx);
 
-  const mano = room.initial_mano;
-  const turn = mano;
   const nowTs = nowIso();
 
+  // Forma exacta del MatchState que espera el frontend (src/game/types.ts).
   const matchState = {
-    version: 1,
-    phase: "play" as const,
-    mano,
-    turn,
-    round: 1,
-    trickIndex: 0,
-    hands,
-    tricks: [{ cards: [] as { seat: number; card: Card }[] }],
-    deckRemaining: remaining,
-    score: { team02: 0, team13: 0 }, // equipos: 0+2 vs 1+3
-    targetCames: room.target_cames,
+    scores: {
+      nos: { males: 0, bones: 0 },
+      ells: { males: 0, bones: 0 },
+    },
+    camesWon: { nos: 0, ells: 0 },
+    cames: 0,
     targetCama: room.target_cama,
-    envit: { state: "idle" as const, value: 0 },
-    truc: { state: "idle" as const, value: 1 },
-    startedAt: nowTs,
+    targetCames: room.target_cames,
+    dealer,
+    history: [] as unknown[],
+    round: {
+      hands,
+      mano,
+      turn: mano,
+      tricks: [{ cards: [] as unknown[] }],
+      trucState: { kind: "none", level: 0 },
+      envitState: { kind: "none" },
+      envitResolved: false,
+      phase: "envit",
+      log: [{ type: "deal", dealer }],
+    },
   };
 
   const { error } = await supabase
@@ -626,7 +631,7 @@ async function startMatch(input: z.infer<typeof StartMatchSchema>) {
     .eq("id", room.id);
   if (error) throw new Error(error.message);
 
-  return { ok: true as const, roomId: room.id, mano, turn };
+  return { ok: true as const, roomId: room.id, mano, turn: mano };
 }
 
 // ---------------------------------------------------------------------------
