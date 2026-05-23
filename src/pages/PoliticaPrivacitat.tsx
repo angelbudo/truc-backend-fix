@@ -236,7 +236,8 @@ const PoliticaPrivacitat = () => {
                 </ul>
                 <p className="text-sm text-muted-foreground">No fem servir cookies de seguiment, ni publicitat, ni eines d'analítica de tercers.</p>
 
-                <p className="font-bold mb-2">Actualització — Compte vinculat (opcional)</p>
+                <p className="font-bold mb-2">
+                  Compte vinculat (opcional)</p>
                   <p>
                     Per a poder <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>,
                     l'app permet vincular un compte. Si decideixes fer-ho, es tracten aquestes dades
