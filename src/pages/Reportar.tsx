@@ -382,7 +382,7 @@ const Reportar = () => {
         <article className="prose prose-sm md:prose-base max-w-none text-foreground">
           <p className="text-xs text-muted-foreground inline-flex items-center gap-1">
             <Shield className="w-3.5 h-3.5" /> {T.moderation}
-          </p><br/><br/><br/>
+          </p><br/><br/>
           <h1 className="font-display font-black italic text-gold text-3xl md:text-4xl normal-case mb-2">
             {T.h1}
           </h1>
