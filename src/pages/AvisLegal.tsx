@@ -295,15 +295,7 @@ const AvisLegal = () => {
           )}
         </article>
 
-        <footer className="pt-6 border-t border-border">
-          <Button asChild variant="outline" className="w-full border-2">
-            <Link to="/">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              {t("common.back_to")}
-            </Link>
-          </Button>
-        </footer>
-      </div>
+     </div>
     </main>
   );
 };
