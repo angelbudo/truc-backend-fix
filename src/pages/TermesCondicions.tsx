@@ -25,7 +25,7 @@ const TermesCondicions = () => {
     meta.setAttribute("content", desc);
   }, [isEs]);
 
-  const lastUpdate = isEs ? "30 de abril de 2026" : "30 d'abril de 2026";
+  const lastUpdate = isEs ? "23 de mayo de 2026" : "23 de maig de 2026";
   const backLabel = isEs ? "Volver al inicio" : "Tornar a inici";
 
   return (
@@ -62,8 +62,8 @@ const TermesCondicions = () => {
                 </p>
               </section>
 
-              <section className="mt-6 text-red-500 border border-red-500/40 rounded-md p-3">
-                <h2 className="font-display font-bold text-xl mt-2 mb-2 text-red-500">1 bis. Cuenta vinculada y nombre de usuario (opcional)</h2>
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Cuenta vinculada y nombre de usuario (opcional)</h2>
                 <p>
                   Jugar al Truc Valencià <strong>no requiere crear cuenta</strong>. Si quieres{" "}
                   <strong>guardar tu progreso y sincronizarlo entre dispositivos</strong>, puedes
@@ -243,14 +243,6 @@ const TermesCondicions = () => {
           )}
         </article>
 
-        <footer className="pt-6 border-t border-border">
-          <Button asChild variant="outline" className="w-full border-2">
-            <Link to="/">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              {isEs ? "Volver al inicio" : "Tornar a l'inici"}
-            </Link>
-          </Button>
-        </footer>
       </div>
     </main>
   );
