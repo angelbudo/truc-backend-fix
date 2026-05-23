@@ -211,8 +211,8 @@ const TermesCondicions = () => {
                 <p>Ús personal i lúdic. Cal sobrenom respectuós. Prohibits insults, assetjament, spam i suplantació. Reservem el dret de retirar missatges i bloquejar dispositius.</p>
               </section>
 
-              <section className="mt-6 text-red-500 border border-red-500/40 rounded-md p-3">
-                <h2 className="font-display font-bold text-xl mt-2 mb-2 text-red-500">2 bis. Compte vinculat i nom d'usuari (opcional)</h2>
+              <section className="mt-6 p-3">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Compte vinculat i nom d'usuari (opcional)</h2>
                 <p>
                   Jugar al Truc Valencià <strong>no requereix crear compte</strong>. Si vols{" "}
                   <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>, pots
@@ -224,7 +224,7 @@ const TermesCondicions = () => {
                   <li>El nom d'usuari és <strong>únic</strong>, visible per a la resta de jugadors i ha de respectar les mateixes regles que el sobrenom (sense insults, sense suplantació, sense contingut ofensiu, sense dades personals).</li>
                   <li>Ens reservem el dret de <strong>reanomenar o bloquejar</strong> noms d'usuari que incompleixen aquestes regles o que suplanten marques, persones reals o personatges públics.</li>
                   <li>Un compte vinculat és <strong>personal i intransferible</strong>.</li>
-                  <li>Pots <strong>desvincular o eliminar el compte</strong> en qualsevol moment des d'<em>Ajustes</em>.</li>
+                  <li>Pots <strong>desvincular o eliminar el compte</strong> en qualsevol moment des de <em>Configuració</em>.</li>
                 </ul>
                 <p>
                   El tractament del correu i del nom d'usuari es detalla a la{" "}
@@ -232,11 +232,11 @@ const TermesCondicions = () => {
                 </p>
               </section>
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Limitació de responsabilitat</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Limitació de responsabilitat</h2>
                 <p>L'app es facilita "tal qual". No assumim responsabilitat pel contingut publicat pels usuaris.</p>
               </section>
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Llei aplicable</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Llei aplicable</h2>
                 <p>Llei espanyola.</p>
               </section>
             </>
