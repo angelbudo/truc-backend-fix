@@ -194,21 +194,13 @@ async function createRoom(input: z.infer<typeof CreateRoomSchema>) {
 
   const exists = await fetchRoomByCode(code);
   if (exists) {
-    // Si la mesa existent ja no és jugable (finished/abandoned) o és una
-    // mesa "lobby" buida (sense jugadors), reciclem la fila esborrant-la
-    // perquè la nova mesa ocupi exactament el mateix codi "Taula XXXXXX".
-    const players = await fetchPlayers(exists.id);
-    const recyclable =
-      exists.status === "finished" ||
-      exists.status === "abandoned" ||
-      (exists.status === "lobby" && players.length === 0);
-    if (!recyclable) {
-      // La mesa fixa ja està ocupada: el client ha de tornar a calcular
-      // el primer slot lliure i reintentar amb un altre codi.
-      throw new Error("code_in_use");
-    }
+    // Les mesas són fixes: si la fila ja existeix al codi sol·licitat,
+    // la reciclem SEMPRE (esborrem jugadors i la fila) perquè la nova
+    // partida ocupi exactament el mateix codi "Taula XXXXXX". Així el
+    // botó "Crear mesa" mai falla amb `code_in_use` per una mesa fixa.
     await supabase.from("room_players").delete().eq("room_id", exists.id);
-    await supabase.from("rooms").delete().eq("id", exists.id);
+    const { error: delErr } = await supabase.from("rooms").delete().eq("id", exists.id);
+    if (delErr) throw new Error(delErr.message);
   }
 
   const { data: room, error } = await supabase
