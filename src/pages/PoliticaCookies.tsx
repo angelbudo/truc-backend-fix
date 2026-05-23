@@ -25,7 +25,7 @@ const PoliticaCookies = () => {
     meta.setAttribute("content", desc);
   }, [isEs]);
 
-  const lastUpdate = isEs ? "30 de abril de 2026" : "30 d'abril de 2026";
+  const lastUpdate = isEs ? "23 de mayo de 2026" : "23 de maig de 2026";
   const backLabel = isEs ? "Volver al inicio" : "Tornar a inici";
 
   return (
@@ -129,8 +129,7 @@ const PoliticaCookies = () => {
                   imprescindibles para el funcionamiento del servicio. Estas <strong>no realizan seguimiento</strong>{" "}
                   de tu actividad ni perfilan tu comportamiento.
                 </p>
-                <div className="text-red-500 mt-3 border border-red-500/40 rounded-md p-3">
-                  <p className="font-bold mb-1">Actualización — Sesión de cuenta vinculada</p>
+                  <p className="font-bold mb-1">Sesión de cuenta vinculada</p>
                   <p>
                     Si decides <strong>vincular una cuenta</strong> con correo electrónico (o con Google/Apple)
                     para guardar el progreso entre dispositivos, el proveedor de autenticación guarda en tu
@@ -140,7 +139,6 @@ const PoliticaCookies = () => {
                     seguimiento publicitario. Puedes eliminarlo en cualquier momento cerrando sesión o
                     borrando los datos del navegador.
                   </p>
-                </div>
               </section>
 
               <section className="mt-6">
@@ -206,8 +204,7 @@ const PoliticaCookies = () => {
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Què guardem al teu dispositiu</h2>
                 <p>Identificador anònim de dispositiu, sobrenom, preferències de joc, estat de l'última partida i estadístiques anònimes per als bots.</p>
-                <div className="text-red-500 mt-3 border border-red-500/40 rounded-md p-3">
-                  <p className="font-bold mb-1">Actualització — Sessió de compte vinculat</p>
+                  <p className="font-bold mb-1">Sessió de compte vinculat</p>
                   <p>
                     Si decideixes <strong>vincular un compte</strong> amb correu electrònic (o amb
                     Google/Apple) per a guardar el progrés entre dispositius, el proveïdor
@@ -216,7 +213,7 @@ const PoliticaCookies = () => {
                     estrictament tècnic i no s'utilitza per a seguiment publicitari. Pots eliminar-lo
                     tancant sessió o esborrant les dades del navegador.
                   </p>
-                </div>
+                
               </section>
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Més informació</h2>
