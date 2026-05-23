@@ -284,36 +284,71 @@ const PoliticaPrivacitat = () => {
                 </ul>
               </section>
 
-              <section className="mt-6">
+           <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">6. Els teus drets (ARCO / ARSULIPO)</h2>
-                <p>Tens dret d'accés, rectificació, cancel·lació, oposició, limitació, portabilitat i a no ser objecte de decisions automatitzades.</p>
+                <p>Encara que tractem dades mínimes i pseudonimitzats, tens dret a:</p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Accés (A)</strong>: saber què tractem sobre el teu identificador anònim.</li>
+                  <li><strong>Rectificació (R)</strong>: corregir dades inexactes (p. ex., el sobrenom).</li>
+                  <li><strong>Cancel·lació / Supressió (C / S)</strong>: demanar que eliminem les estadístiques associades al teu identificador.</li>
+                  <li><strong>Oposició (O)</strong>: oposar-te al tractament concret.</li>
+                  <li><strong>Limitació del tractament (LI)</strong>: demanar que deixem de tractar les dades temporalment.</li>
+                  <li><strong>Portabilitat (P)</strong>: rebre les teues dades en un format estructurat (JSON).</li>
+                  <li><strong>No ser objecte de decisions automatitzades (O)</strong>: els bots adapten el seu joc, però no prenen decisions amb efectes jurídics sobre tu.</li>
+                </ul>
                 <p>
-                  Tens dret a presentar una reclamació davant l'<strong>Agencia Española de Protección de Datos</strong> (
-                  <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="underline text-primary">www.aepd.es</a>).
+                  <strong>Com exercir-los</strong>: la forma més ràpida és des del propi dispositiu 
+                  (esborrar dades del navegador o de l'app). Si vols que esborrem dades del costat servidor,
+                  contacta indicant el teu identificador anònim de dispositiu (ho trobaràs en{" "}
+                  <em>Configuració → Diagnòstic</em>). Respondrem en un termini màxim d'un mes.
+                </p>
+                <p>
+                  Tens dret a presentar una reclamació davant l'<strong>Agència Espanyola de
+                  Protecció de Dades</strong> (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="underline text-primary">www.aepd.es</a>)
+                  si consideres que el tractament de les teues dades no és correcte.
                 </p>
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Menors d'edat</h2>
-                <p>L'app no està dirigida específicament a menors.</p>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Menors d' edat</h2>
+                <p>
+                  L'app no està dirigida específicament a menors. Si eres pare, mare o tutor i creus
+                  que un menor ha facilitat dades, contacta'ns i els eliminarem immediatament. Al no
+                  demanar dades identificatives, no és tècnicament possible verificar l'edat dels usuaris.
+                </p>
               </section>
 
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">8. Seguretat</h2>
-                <p>Comunicacions xifrades (HTTPS), polítiques RLS i revocació de privilegis.</p>
+                <p>
+                  Apliquem mesures tècniques raonables: comunicacions xifrades (HTTPS), accés restringit
+                  a la base de dades mitjançant polítiques de seguretat a nivell de fila (*RLS) i revocació de privilegis.
+                </p>
               </section>
 
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">9. Canvis en aquesta política</h2>
-                <p>Si modifiquem aquesta política, actualitzarem la data i farem visible un avís a l'app.</p>
+                <p>
+                  Si modifiquem esta política, actualitzarem la data de l'encapçalat i farem visible un
+                  avís en l'app. La versió vigent sempre és l'accessible des d'aquesta pàgina.
+                </p>
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">10. Esborrat del compte i de les dades (Google Play)</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">10. Esborrament del compte i de les dades (Google Play)</h2>
+                <p>
+                  D'acord amb la política de Google *Play sobre esborrament de dades d'usuari, oferim dos
+                  camins equivalents per a sol·licitar l'esborrament de totes les dades associades al teu dispositiu:
+                </p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
-                  <li><strong>Dins de l'app</strong>: <em>Configuració → Privacitat i dades → Esborrar les meues dades</em>.</li>
-                  <li><strong>Pàgina pública</strong>: <a href="/esborrar-dades" className="underline text-primary">/esborrar-dades</a>.</li>
+                  <li><strong>Dins de l'app</strong>: <em>Configuració → Privacitat i dades → Esborrar les meues dades</em>. Esborra dades del servidor i locals en un sol pas.</li>
+                  <li><strong>Pàgina pública</strong>: <a href="/esborrar-dades" className="underline text-primary">/esborrar-dades</a>. Permet sol·licitar-ho des d'un navegador, encara que ja no tingues l'app instal·lada, indicant l'identificador anònim del dispositiu.</li>
                 </ul>
+                <p className="text-sm text-muted-foreground">
+                  Categories de dades processades segons el Data Safety form de Google Play: <em>App activity</em>{" "}
+                  (esdeveniments de partida) i <em>User-generated content</em> (sobrenom i missatges de xat). No 
+                  s'arrepleguen dades de localització, contactes, fitxers, identificadors publicitaris ni dades financeres.
+                </p>
               </section>
             </>
           )}
