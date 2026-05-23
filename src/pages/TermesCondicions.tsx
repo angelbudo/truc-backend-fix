@@ -31,7 +31,6 @@ const TermesCondicions = () => {
   return (
     <main className="min-h-screen px-5 py-8 bg-background text-foreground">
       <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
-          <p className="text-xs text-muted-foreground">{isEs ? "Actualizados" : "Actualitzats"}: {lastUpdate}</p>
           <div className="flex items-center justify-between">
             <ShareAppButton />
             <Button onClick={() => navigate("/")} size="sm" variant="outline" className="h-8 w-8 p-0 border-foreground/80 text-foreground hover:bg-foreground/10" aria-label={backLabel} title={backLabel}>
