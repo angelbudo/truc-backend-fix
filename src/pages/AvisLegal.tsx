@@ -49,7 +49,7 @@ const AvisLegal = () => {
         </header>
 
         <article className="prose prose-sm md:prose-base max-w-none text-foreground">
-          <p className="text-xs text-muted-foreground">{isEs ? "Actualizado" : "Actualitzat"}: {lastUpdate}</p><hr/>
+          <p className="text-xs text-muted-foreground">{isEs ? "Actualizado" : "Actualitzat"}: {lastUpdate}</p><br/>
           <h1 className="font-display font-black italic text-gold text-3xl md:text-4xl normal-case mb-2">
             {isEs ? "Aviso Legal" : "Avís Legal"}
           </h1>
