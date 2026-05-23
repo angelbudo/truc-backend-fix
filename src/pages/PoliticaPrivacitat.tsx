@@ -319,14 +319,6 @@ const PoliticaPrivacitat = () => {
           )}
         </article>
 
-        <footer className="pt-6 border-t border-border">
-          <Button asChild variant="outline" className="w-full border-2">
-            <Link to="/">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              {isEs ? "Volver al inicio" : "Tornar a l'inici"}
-            </Link>
-          </Button>
-        </footer>
       </div>
     </main>
   );
