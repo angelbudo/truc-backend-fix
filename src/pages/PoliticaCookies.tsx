@@ -191,49 +191,143 @@ const PoliticaCookies = () => {
                 Aquesta política explica quina informació guardem al teu navegador o dispositiu mentre utilitzes
                 l'aplicació <strong>Truc Valencià</strong>, i com pots gestionar-la.
               </p>
-              <section className="mt-6">
+       <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">1. Resum</h2>
                 <ul className="list-disc pl-6 my-3 space-y-1">
-                  <li><strong>No fem servir cookies de seguiment</strong>, ni publicitàries, ni d'analítica de tercers.</li>
-                  <li>Sí que fem servir <strong>localStorage</strong> i, en alguns casos, <strong>sessionStorage</strong>.</li>
-                  <li>Tota aquesta informació és <strong>tècnicament necessària</strong>.</li>
+                  <li><strong>No usem cookies de seguiment</strong>, ni publicitàries, ni d'analítica de tercers (Google Analytics, Facebook Pixel, etc.).</li>
+                  <li>Sí que utilitzem <strong>localStorage</strong> i, en alguns casos, <strong>sessionStorage</strong> ddel teu navegador per a guardar preferències i l'estat de la partida.</li>
+                  <li>Tota aquesta informació és <strong>tècnicament necessària</strong> per al funcionament de l'app, així que no requerix consentiment exprés segons l'article 22.2 de la LSSI-CE.</li>
                   <li>Pots esborrar-la en qualsevol moment des del teu navegador.</li>
                 </ul>
               </section>
+
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Què guardem al teu dispositiu</h2>
-                <p>Identificador anònim de dispositiu, sobrenom, preferències de joc, estat de l'última partida i estadístiques anònimes per als bots.</p>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Què és localStorage?</h2>
+                <p>
+                  <strong>localStorage</strong> és un mecanisme estàndard del navegador que permet a una web
+                  guardar xicotetes quantitats de text en el teu propi dispositiu. A diferència de les cookies,
+                  <strong> mai s'envia automàticament a cap servidor</strong>: només accedix a ell el codi
+                  de l'app que ja s'ha carregat en el teu navegador.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Què guardem en el teu dispositiu</h2>
+                <div className="overflow-x-auto my-4">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-border bg-muted/50">
+                        <th className="text-left p-2 font-display">Tipus</th>
+                        <th className="text-left p-2 font-display">Finalitat</th>
+                        <th className="text-left p-2 font-display">Duració</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-border">
+                        <td className="p-2 align-top"><strong>Identificador anònim de dispositiu</strong></td>
+                        <td className="p-2 align-top">Cadena aleatòria generada la primera vegada que obris l'app per a identificar la teua cadira en sales en línia.</td>
+                        <td className="p-2 align-top">Persistent</td>
+                      </tr>
+                      <tr className="border-b border-border">
+                        <td className="p-2 align-top"><strong>Sobrenom</strong></td>
+                        <td className="p-2 align-top">L'àlies que escrius per a identificar-te en la taula.</td>
+                        <td className="p-2 align-top">Persistent</td>
+                      </tr>
+                      <tr className="border-b border-border">
+                        <td className="p-2 align-top"><strong>Preferències de joc</strong></td>
+                        <td className="p-2 align-top">Idioma, dificultat dels bots, tipus de llit (9 o 12), timeout de torn i altres configuracions.</td>
+                        <td className="p-2 align-top">Persistent</td>
+                      </tr>
+                      <tr className="border-b border-border">
+                        <td className="p-2 align-top"><strong>Estat de l'última partida</strong></td>
+                        <td className="p-2 align-top">Permet continuar una partida contra bots si tanques i tornes a obrir l'app.</td>
+                        <td className="p-2 align-top">Fins que la finalitzes</td>
+                      </tr>
+                      <tr className="border-b border-border">
+                        <td className="p-2 align-top"><strong>Estadístiques per a l'adaptació dels bots</strong></td>
+                        <td className="p-2 align-top">Comptadors anònims per a ajustar el comportament dels bots al teu estil de joc.</td>
+                        <td className="p-2 align-top">Persistent</td>
+                      </tr>
+                      <tr>
+                        <td className="p-2 align-top"><strong>Estat de la sessió de diagnòstic</strong><br /><span className="text-xs text-muted-foreground">(sessionStorage)</span></td>
+                        <td className="p-2 align-top">Informació tècnica per a depuració mentres tens la pestanya oberta.</td>
+                        <td className="p-2 align-top">Fins a tancar la pestanya</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-sm text-muted-foreground">Cap d'estes dades s'utilitza per a perfilament publicitari ni es compartix amb tercers.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Cookies estrictament tècniques de tercers</h2>
+                <p>
+                  Per a les partides en línia, l'app usa un proveïdor d'infraestructura. En algunes peticions,
+                  aquest proveïdor pot utilitzar <strong>cookies estrictament tècniques o capçaleres de sessió</strong>{" "}
+                  imprescindibles per al funcionament del servici. Aquestes <strong>no realitzen seguiment</strong>{" "}
+                  de la teua activitat ni perfilen el teu comportament.
+                </p>
                   <p className="font-bold mb-1">Sessió de compte vinculat</p>
                   <p>
-                    Si decideixes <strong>vincular un compte</strong> amb correu electrònic (o amb
-                    Google/Apple) per a guardar el progrés entre dispositius, el proveïdor
-                    d'autenticació guarda al teu navegador un <strong>token de sessió</strong> (a{" "}
-                    <code>localStorage</code>) per a mantenir-te identificat. Aquest token és
-                    estrictament tècnic i no s'utilitza per a seguiment publicitari. Pots eliminar-lo
-                    tancant sessió o esborrant les dades del navegador.
+                    Si decidixes <strong>vincular un compte</strong> amb correu electrònic (o amb  Google/Apple)
+                    per a guardar el progrés entre dispositius, el proveïdor d'autenticació guarda en el teu
+                    navegador un <strong>token de sessió</strong> (en <code>localStorage</code>) per a
+                    mantindre't identificat i no haver de tornar a iniciar sessió cada vegada. Aquest token és
+                    és estrictament tècnic, necessari per a la funcionalitat de compte i no s'usa per a
+                    seguiment publicitari. Pots eliminar-ho en qualsevol moment tancant sessió o
+                    esborrant les dades del navegador.
                   </p>
-                
               </section>
+
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Més informació</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Com gestionar o esborrar les dades</h2>
+                <p>Pots eliminar tot el que l'app guarda en el teu dispositiu:</p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Des de l'app</strong>: amb el botó "Esborrar partida guardada" de la pantalla d'inici.</li>
+                  <li><strong>Des del navegador</strong> (mètode més complet):
+                    <ul className="list-disc pl-6 mt-1 space-y-1">
+                      <li><strong>Chrome / Edge</strong>: Configuració → Privacitat i seguretat → Esborrar dades de navegació → <em>Cookies i altres dades de llocs</em>.</li>
+                      <li><strong>Firefox</strong>: Configuració → Privacitat i seguretat → Cookies i dades del lloc → Esborrar dades.</li>
+                      <li><strong>Safari (iOS / macOS)</strong>: Configuració → Safari → Esborrar historial i dades de llocs web.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p className="text-sm text-muted-foreground">
+                  Tin en compte que esborrar estes dades farà que perdes l'identificador de dispositiu, el
+                  sobrenom i les teues preferències.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">6. Per què no vam mostrar el típic bàner de cookies?</h2>
                 <p>
-                  Consulta la <Link to="/privacitat" className="underline text-primary">Política de Privacitat</Link>,
-                  els <Link to="/termes" className="underline text-primary">Termes i Condicions</Link> i l'
+                  L'article 22.2 de la *LSSI-CE i les directrius de l'Agència Espanyola de Protecció de Dades
+                  exclouen del consentiment previ les cookies o tècniques d'emmagatzematge que siguen{" "}
+                  <strong>estrictament necessàries</strong> per a la prestació del servici sol·licitat per
+                  l'usuari. Tot el que guardem entra dins d'eixa categoria.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Canvis en esta política</h2>
+                <p>Si modifiquem el tipus d'emmagatzematge que utilitzem, actualitzarem esta pàgina i la data de l'encapçalat.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">8. Més informació</h2>
+                <p>
+                  Per al tractament de dades personals consulta la{" "}
+                  <Link to="/privacitat" className="underline text-primary">Política de Privacitat</Link>.
+                   Per a les regles d'ús del servici, els{" "}
+                  <Link to="/termes" className="underline text-primary">Termes i Condicions</Link> y l'{" "}
                   <Link to="/avis-legal" className="underline text-primary">Avís Legal</Link>.
                 </p>
               </section>
             </>
+            </>
           )}
         </article>
 
-        <footer className="pt-6 border-t border-border">
-          <Button asChild variant="outline" className="w-full border-2">
-            <Link to="/">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              {isEs ? "Volver al inicio" : "Tornar a l'inici"}
-            </Link>
-          </Button>
-        </footer>
       </div>
     </main>
   );
