@@ -17,7 +17,7 @@ import { useMyProfile } from "@/lib/playerStats";
 
 /**
  * Pantalla de benvinguda que es mostra la primera vegada que s'obre l'app
- * (quan no hi ha cap nom desat). Bloqueja la resta de l'aplicació fins que
+ * (quan no hi ha cap nom guardat). Bloqueja la resta de l'aplicació fins que
  * el jugador introdueix i confirma el seu nom.
  */
 function WelcomeForm({ onAccept }: { onAccept: (name: string) => void }) {
@@ -169,7 +169,7 @@ function Gate({ children }: { children: ReactNode }) {
   const location = useLocation();
   if (!ready) {
     // Mentres es carrega localStorage no mostrem res per evitar un flaix
-    // del formulari als jugadors que ja tenen nom desat.
+    // del formulari als jugadors que ja tenen nom guardat.
     return null;
   }
   // Permet accedir a /auth (vincular correu) abans de completar la benvinguda,
