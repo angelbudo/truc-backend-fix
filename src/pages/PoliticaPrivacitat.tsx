@@ -236,8 +236,7 @@ const PoliticaPrivacitat = () => {
                 </ul>
                 <p className="text-sm text-muted-foreground">No fem servir cookies de seguiment, ni publicitat, ni eines d'analítica de tercers.</p>
 
-                <div className="text-red-500 mt-4 border border-red-500/40 rounded-md p-3">
-                  <p className="font-bold mb-2">Actualització — Compte vinculat (opcional)</p>
+                <p className="font-bold mb-2">Actualització — Compte vinculat (opcional)</p>
                   <p>
                     Per a poder <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>,
                     l'app permet vincular un compte. Si decideixes fer-ho, es tracten aquestes dades
@@ -258,7 +257,6 @@ const PoliticaPrivacitat = () => {
                     crear o vincular el compte (art. 6.1.a RGPD) i l'execució del servei sol·licitat
                     (art. 6.1.b RGPD).
                   </p>
-                </div>
               </section>
 
               <section className="mt-6">
