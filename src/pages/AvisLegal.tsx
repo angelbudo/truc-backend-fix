@@ -145,8 +145,8 @@ const AvisLegal = () => {
                   <Link to="/privacitat" className="underline text-primary">Política de Privacidad</Link>.
                   La mayoría de la información se guarda en el dispositivo del usuario.
                 </p>
-                <p className="text-red-500">
-                  <strong>Actualización:</strong> para poder <strong>guardar el progreso entre dispositivos</strong>,
+                <p>
+                  Para poder <strong>guardar el progreso entre dispositivos</strong>,
                   la app ofrece de forma <strong>opcional</strong> vincular la cuenta con un{" "}
                   <strong>correo electrónico</strong> y elegir un <strong>nombre de usuario público</strong>.
                   Estos datos solo se solicitan si el usuario decide crear o vincular una cuenta;
@@ -265,8 +265,8 @@ const AvisLegal = () => {
                   <Link to="/privacitat" className="underline text-primary">Política de Privacitat</Link>.
                   La majoria d'informació es guarda al dispositiu de l'usuari.
                 </p>
-                <p className="text-red-500">
-                  <strong>Actualització:</strong> per a poder <strong>guardar el progrés entre dispositius</strong>,
+                <p>
+                  Per a poder <strong>guardar el progrés entre dispositius</strong>,
                   l'app ofereix de manera <strong>opcional</strong> vincular el compte amb un{" "}
                   <strong>correu electrònic</strong> i triar un <strong>nom d'usuari públic</strong>.
                   Aquestes dades només es demanen si l'usuari decideix crear o vincular un compte;
