@@ -63,7 +63,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Cuenta vinculada y nombre de usuario (opcional)</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Cuenta vinculada y nombre de usuario (opcional)</h2>
                 <p>
                   Jugar al Truc Valencià <strong>no requiere crear cuenta</strong>. Si quieres{" "}
                   <strong>guardar tu progreso y sincronizarlo entre dispositivos</strong>, puedes
@@ -75,16 +75,16 @@ const TermesCondicions = () => {
                   <li>El nombre de usuario es <strong>único</strong>, visible para el resto de jugadores y debe respetar las mismas reglas que el sobrenombre (no insultos, no suplantación, no contenidos ofensivos, no datos personales).</li>
                   <li>Nos reservamos el derecho de <strong>renombrar o bloquear</strong> nombres de usuario que incumplan estas reglas o que suplanten marcas, personas reales o personajes públicos.</li>
                   <li>Una cuenta vinculada es <strong>personal e intransferible</strong>. No compartas tus credenciales.</li>
-                  <li>Puedes <strong>desvincular o eliminar tu cuenta</strong> en cualquier momento desde <em>Ajustes</em>, conservando o borrando tus datos según escojas.</li>
+                  <li>Puedes <strong>desvincular o eliminar tu cuenta</strong> en cualquier momento desde <em>Configuració</em>, conservando o borrando tus datos según escojas.</li>
                 </ul>
                 <p>
                   El tratamiento del correo y del nombre de usuario se detalla en la{" "}
-                  <Link to="/privacitat" className="underline">Política de Privacidad</Link>.
+                  <Link to="/privacitat" className="underline text-primary">Política de Privacidad</Link>.
                 </p>
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Uso permitido</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Uso permitido</h2>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li>La app es para uso personal, lúdico y no comercial.</li>
                   <li>Hay que ser <strong>mayor de 14 años</strong>. Si tienes entre 14 y 18 años, te recomendamos usarla con conocimiento de tus padres o tutores.</li>
@@ -94,10 +94,10 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Reglas del chat</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Reglas del chat</h2>
                 <p>La app dispone de dos tipos de comunicación entre jugadores:</p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
-                  <li><strong>Frases predefinidas de mesa</strong>: mensajes cortos del juego ("¡Envite!", "¡Quiero!", "¡Buena!", etc.).</li>
+                  <li><strong>Frases predefinidas de mesa</strong>: mensajes cortos del juego ("¡Envido!", "¡Quiero!", "¡Voy a ti!", etc.).</li>
                   <li><strong>Chat libre de texto</strong>: mensajes cortos (máximo 200 caracteres) entre jugadores de una misma sala.</li>
                 </ul>
                 <p><strong>Conductas prohibidas en el chat (y en el sobrenombre):</strong></p>
@@ -113,7 +113,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Moderación</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Moderación</h2>
                 <p>Para mantener un entorno seguro:</p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li>Aplicamos filtros técnicos automáticos (límites de longitud, control de envíos masivos y validaciones del lado del servidor).</li>
@@ -124,7 +124,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Sistema de reporte</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">6. Sistema de reporte</h2>
                 <p>Si ves un mensaje o comportamiento que incumple estos términos, puedes reportarlo:</p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li><strong>Desde la sala</strong>: mantén pulsado un mensaje del chat para abrir la opción de reportar.</li>
@@ -138,7 +138,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">6. Disponibilidad del servicio</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Disponibilidad del servicio</h2>
                 <p>
                   La app se proporciona <strong>"tal cual" y "según disponibilidad"</strong>. No garantizamos
                   que esté libre de errores, interrupciones o pérdidas de conexión.
@@ -151,7 +151,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Limitación de responsabilidad</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">8. Limitación de responsabilidad</h2>
                 <p>En la máxima medida permitida por la ley aplicable:</p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li>La app se facilita <strong>sin ninguna garantía</strong> expresa o implícita.</li>
@@ -163,7 +163,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">8. Propiedad intelectual</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">9. Propiedad intelectual</h2>
                 <p>
                   La app, su código, diseño, gráficos y textos están protegidos por derechos de autor de
                   su titular. Se permite el uso personal y privado. Queda prohibida cualquier reproducción,
@@ -172,7 +172,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">9. Modificaciones de los términos</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">10. Modificaciones de los términos</h2>
                 <p>
                   Podemos actualizar estos términos por motivos legales, técnicos u operativos. El uso
                   continuado tras la fecha de actualización implica la aceptación de la nueva versión.
@@ -180,7 +180,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">10. Ley aplicable y jurisdicción</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">11. Ley aplicable y jurisdicción</h2>
                 <p>
                   Estos términos se rigen por la ley española. Para cualquier controversia, las partes se
                   someten a los juzgados y tribunales que correspondan según la legislación de consumo aplicable.
@@ -188,7 +188,7 @@ const TermesCondicions = () => {
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">11. Contacto</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">12. Contacto</h2>
                 <p>
                   Para reportes, solicitudes de derechos o consultas legales, contacta a través del canal
                   de incidencias. Consulta también la{" "}
@@ -200,44 +200,150 @@ const TermesCondicions = () => {
             <>
               <p className="text-muted-foreground">
                 Aquests termes regulen l'ús de l'aplicació <strong>Truc Valencià</strong>.
-                En utilitzar-la acceptes íntegrament aquestes condicions.
+                En utilitzar-la acceptes íntegrament aquestes condicions. Si no estàs d'acord, no la utilitzes.
               </p>
+    
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">1. Objecte i acceptació</h2>
-                <p>App gratuïta per a jugar al Truc. L'ús implica l'acceptació de la <Link to="/privacitat" className="underline text-primary">Política de Privacitat</Link>.</p>
-              </section>
-              <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Ús permès, xat i moderació</h2>
-                <p>Ús personal i lúdic. Cal sobrenom respectuós. Prohibits insults, assetjament, spam i suplantació. Reservem el dret de retirar missatges i bloquejar dispositius.</p>
+                <p>
+                  Truc Valencià s una aplicació gratuïta per a jugar al joc de cartes del Truc, només
+                  contra bots o en línia amb amics. L'ús de l'app implica l'acceptació d'estos termes
+                  i de la <Link to="/privacitat" className="underline text-primary">Política de Privacitat</Link>.
+                </p>
               </section>
 
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Compte vinculat i nom d'usuari (opcional)</h2>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Compte vinculat i nom d'usuari (opcional)</h2>
                 <p>
-                  Jugar al Truc Valencià <strong>no requereix crear compte</strong>. Si vols{" "}
-                  <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>, pots
-                  vincular un compte facilitant un <strong>correu electrònic</strong> (o iniciant
-                  sessió amb Google/Apple) i triant un <strong>nom d'usuari públic</strong>.
+                  Jugar al Truc Valencià <strong>no requerix crear compte</strong>. Si vols{" "}
+                  <strong>guardar el teu progrés i sincronitzar-lo entre dispositius</strong>, pots
+                  vvincular un compte facilitant un <strong>correu electrònic</strong> (o iniciant
+                  sessió ambn Google/Apple) i triant un <strong>nom d'usuari públic</strong>.
                 </p>
                 <ul className="list-disc pl-6 my-2 space-y-1">
-                  <li>Cal facilitar un correu del qual sigues titular. Està prohibit usar correus de tercers sense el seu consentiment.</li>
-                  <li>El nom d'usuari és <strong>únic</strong>, visible per a la resta de jugadors i ha de respectar les mateixes regles que el sobrenom (sense insults, sense suplantació, sense contingut ofensiu, sense dades personals).</li>
-                  <li>Ens reservem el dret de <strong>reanomenar o bloquejar</strong> noms d'usuari que incompleixen aquestes regles o que suplanten marques, persones reals o personatges públics.</li>
-                  <li>Un compte vinculat és <strong>personal i intransferible</strong>.</li>
-                  <li>Pots <strong>desvincular o eliminar el compte</strong> en qualsevol moment des de <em>Configuració</em>.</li>
+                  <li>Has de facilitar un correu del qual sigues titular. Està prohibit usar correus de tercers sense el seu consentiment.</li>
+                  <li>El nom d'usuari és <strong>únic</strong>, és únic, visible per a la resta de jugadors i ha de respectar les mateixes regles que el sobrenom (no insults, no suplantació, no continguts ofensius, no dades personals).</li>
+                  <li>Ens reservem el dret de <strong>canviar de nom o bloquejar </strong> noms d'usuari que incomplisquen estes regles o que suplanten marques, persones reals o personatges públics.</li>
+                  <li>Un compte vinculat és <strong>personal i intransferible</strong>. No compartisques les teues credencials.</li>
+                  <li>Pots <strong>desvincular o eliminar el teu compte</strong> en qualsevol moment des de <em>Configuració</em>, conservant o esborrant les teues dades segons tries.</li>
                 </ul>
                 <p>
-                  El tractament del correu i del nom d'usuari es detalla a la{" "}
-                  <Link to="/privacitat" className="underline">Política de Privacitat</Link>.
+                  El tractament del correu i del nom d'usuari es detalla en la {" "}
+                  <Link to="/privacitat" className="underline text-primary">Política de Privacitat</Link>.
                 </p>
               </section>
+
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Limitació de responsabilitat</h2>
-                <p>L'app es facilita "tal qual". No assumim responsabilitat pel contingut publicat pels usuaris.</p>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Ús permés</h2>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li>L'app és per a ús personal, lúdic i no comercial.</li>
+                  <li>Cal ser <strong>major de 14 anys</strong>. Si tens entre 14 i 18 anys, et recomanem usar-la amb coneixement dels teus pares o tutors.</li>
+                  <li>Has d'usar un sobrenom respectuós, sense suplantar la identitat de tercers ni utilitzar marques, insults o continguts ofensius.</li>
+                  <li>No pots utilitzar bots, scripts, ferramentes automatitzades o enginyeria inversa per a alterar el funcionament del joc.</li>
+                </ul>
               </section>
+
               <section className="mt-6">
-                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Llei aplicable</h2>
-                <p>Llei espanyola.</p>
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">4. Regles del xat</h2>
+                <p>L'app disposa de dos tipus de comunicació entre jugadors:</p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Frases predefinides de taula</strong>: missatges curts del joc ("Envit!", "Vull!", "Vaig a tu!", etc.).</li>
+                  <li><strong>Xat lliure de text</strong>: missatges curts (màxim 200 caràcters) entre jugadors d'una mateixa sala.</li>
+                </ul>
+                <p><strong>Conductes prohibides en el xat (i en el sobrenom):</strong></p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li>Insults, amenaces, assetjament, discurs d'odi o discriminació.</li>
+                  <li>Continguts sexuals explícits, violents o que puguen ferir la sensibilitat d'altres jugadors.</li>
+                  <li><strong>Spam</strong>, publicitat no sol·licitada, enllaços a webs externes o estafes (phishing).</li>
+                  <li>Compartir <strong>dades personals teues o d'uns altres</strong>.</li>
+                  <li>Suplantar la identitat de persones reals o personatges públics.</li>
+                  <li>Trampes, col·lusió entre jugadors d'equips contraris o qualsevol comportament antiesportiu deliberat.</li>
+                </ul>
+                <p>El xat <strong>no és privat</strong>:  ho veuen tots els jugadors de la sala. Sé respectuós; estàs jugant amb persones reals.</p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">5. Moderació</h2>
+                <p>Per a mantindre un entorn segur:</p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li>Apliquem filtres tècnics automàtics (límits de longitud, control d'enviaments massius i validacions del costat del servidor).</li>
+                  <li>Ens reservem el dret de <strong>retirar missatges</strong>, <strong>tancar sales</strong> o <strong>bloquejar identificadors de dispositiu</strong> que incomplisquen estos termes.</li>
+                  <li>Les sales en línia inactives s'arxiven automàticament als 15 minuts i s'eliminen 1 hora després.</li>
+                  <li>En cas de reincidència o conducta greu, podem aplicar un bloqueig permanent del dispositiu.</li>
+                </ul>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">6. Sistema de reporte</h2>
+                <p>Si veus un missatge o comportament que incomplix estos termes, pots reportar-lo:</p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li><strong>Des de la sala</strong>: mantin pulsat un missatge del xat per a obrir l'opció de reportar.</li>
+                  <li><strong>Per correu d'incidències</strong>: indica el codi de la sala, l'hora aproximada i una descripció del fet.</li>
+                </ul>
+                <p>
+                  Inclou tota la informació possible: <strong>codi de sala</strong>, data i hora aproximada,
+                  sobrenom de la persona reportada i, si tens, una captura. Tractarem els reportes amb
+                  confidencialitat.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">7. Disponibilitat del servici</h2>
+                <p>
+                  L'app es proporciona <strong>"tal qual" i "segons disponibilitat"</strong>. No garantim
+                  que estiga lliure d'errors, interrupcions o pèrdues de connexió.
+                </p>
+                <p>
+                  Les partides en línia depenen de connexió estable a Internet i del proveïdor 
+                  d'infraestructura. <strong>No garantim la conservació indefinida </strong> de partides
+                  ni de l'historial de xat.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">8. Limitació de responsabilitat</h2>
+                <p>En la màxima mesura permesa per la llei aplicable:</p>
+                <ul className="list-disc pl-6 my-3 space-y-1">
+                  <li>L'app es facilita <strong>sense cap garantia</strong> expressa o implícita.</li>
+                  <li><strong>No ens fem responsables</strong> dels danys directes, indirectes, incidentals, especials o conseqüents derivats de l'ús o la impossibilitat d'ús de l'app.</li>
+                  <li><strong>No assumim responsabilitat pel contingut publicat pels usuaris</strong> en el xat o en els sobrenoms.</li>
+                  <li>No responem per perjuís derivats de corts de connexió, decisions del dispositiu, virus o atacs informàtics aliens al nostre control.</li>
+                  <li>Aquestes limitacions <strong>no afecten</strong> els drets que la legislació reconega a les persones consumidores.</li>
+                </ul>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">9. Propietat intel·lectual</h2>
+                <p>
+                  L'app, el seu codi, disseny, gràfics i textos estan protegits per drets d'autor del
+                  seu titular. Es permet l'ús personal i privat. Queda prohibida qualsevol reproducció,
+                  distribució o transformació no autoritzada.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">10. Modificacions dels termes</h2>
+                <p>
+                  Podem actualitzar estos termes per motius legals, tècnics o operatius. L'ús
+                  continuat després de la data d'actualització implica l'acceptació de la nova versió.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">11. Llei aplicable i jurisdicció</h2>
+                <p>
+                  Estos termes es regixen per la llei espanyola. Per a qualsevol controvèrsia, les parts se
+                  sotmeten als jutjats i tribunals que corresponguen segons la legislació de consum aplicable.
+                </p>
+              </section>
+
+              <section className="mt-6">
+                <h2 className="font-display font-bold text-xl mt-4 mb-2">12. Contacte</h2>
+                <p>
+                  Per a reportes, sol·licituds de drets o consultes legals, contacta a través del canal
+                  d'incidències. Consulta també la{" "}
+                  <Link to="/privacitat" className="underline text-primary">Política de Privacitat</Link>.
+                </p>
               </section>
             </>
           )}
