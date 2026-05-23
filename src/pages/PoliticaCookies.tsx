@@ -324,7 +324,6 @@ const PoliticaCookies = () => {
                 </p>
               </section>
             </>
-            </>
           )}
         </article>
 
