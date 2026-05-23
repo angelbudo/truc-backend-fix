@@ -25,7 +25,7 @@ const PoliticaPrivacitat = () => {
     meta.setAttribute("content", desc);
   }, [isEs]);
 
-  const lastUpdate = isEs ? "30 de abril de 2026" : "30 d'abril de 2026";
+  const lastUpdate = isEs ? "23 de mayo de 2026" : "23 de maig de 2026";
   const backLabel = isEs ? "Volver al inicio" : "Tornar a inici";
 
   return (
@@ -84,8 +84,8 @@ const PoliticaPrivacitat = () => {
                 </ul>
                 <p className="text-sm text-muted-foreground">No usamos cookies de seguimiento, ni publicidad, ni herramientas de analítica de terceros.</p>
 
-                <div className="text-red-500 mt-4 border border-red-500/40 rounded-md p-3">
-                  <p className="font-bold mb-2">Actualización — Cuenta vinculada (opcional)</p>
+                  <p className="font-bold mb-2">
+                    Cuenta vinculada (opcional)</p>
                   <p>
                     Para poder <strong>guardar el progreso y sincronizarlo entre dispositivos</strong>,
                     la app permite vincular una cuenta. Si decides hacerlo, se tratan estos datos
@@ -99,14 +99,13 @@ const PoliticaPrivacitat = () => {
                   <p className="mt-2">
                     La vinculación es <strong>voluntaria</strong>. Puedes seguir jugando sin facilitar
                     correo ni nombre de usuario. Si vinculas la cuenta, puedes desvincularla o
-                    eliminarla en cualquier momento desde <em>Ajustes</em>.
+                    eliminarla en cualquier momento desde <em>Configuración</em>.
                   </p>
                   <p className="mt-2">
                     <strong>Base legal</strong> de este tratamiento: tu consentimiento expreso al
                     crear o vincular la cuenta (art. 6.1.a RGPD) y la ejecución del servicio
                     solicitado (art. 6.1.b RGPD).
                   </p>
-                </div>
               </section>
 
               <section className="mt-6">
