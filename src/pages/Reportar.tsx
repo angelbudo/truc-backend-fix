@@ -365,10 +365,6 @@ const Reportar = () => {
   return (
     <main className="min-h-screen px-5 py-8 bg-background text-foreground">
       <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
-        <header className="flex items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground inline-flex items-center gap-1">
-            <Shield className="w-3.5 h-3.5" /> {T.moderation}
-          </p>
           <div className="flex items-center justify-between">
             <ShareAppButton />
             <Button
@@ -382,9 +378,11 @@ const Reportar = () => {
               <LogOut className="w-4 h-4" />
             </Button>
           </div>
-        </header>
 
         <article className="prose prose-sm md:prose-base max-w-none text-foreground">
+          <p className="text-xs text-muted-foreground inline-flex items-center gap-1">
+            <Shield className="w-3.5 h-3.5" /> {T.moderation}
+          </p><br/>
           <h1 className="font-display font-black italic text-gold text-3xl md:text-4xl normal-case mb-2">
             {T.h1}
           </h1>
