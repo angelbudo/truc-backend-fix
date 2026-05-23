@@ -211,7 +211,7 @@ const TermesCondicions = () => {
                 <p>Ús personal i lúdic. Cal sobrenom respectuós. Prohibits insults, assetjament, spam i suplantació. Reservem el dret de retirar missatges i bloquejar dispositius.</p>
               </section>
 
-              <section className="mt-6 p-3">
+              <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Compte vinculat i nom d'usuari (opcional)</h2>
                 <p>
                   Jugar al Truc Valencià <strong>no requereix crear compte</strong>. Si vols{" "}
