@@ -27,7 +27,7 @@ const AvisLegal = () => {
     meta.setAttribute("content", desc);
   }, [isEs]);
 
-  const lastUpdate = isEs ? "30 de abril de 2026" : "30 d'abril de 2026";
+  const lastUpdate = isEs ? "23 de mayo de 2026" : "23 de maig de 2026";
 
   return (
     <main className="min-h-screen px-5 py-8 bg-background text-foreground">
@@ -67,7 +67,7 @@ const AvisLegal = () => {
                   <li><strong>Titular:</strong> Ángel Pérez Lara</li>
                   <li><strong>NIF:</strong> 53361351V</li>
                   <li><strong>Correo de contacto:</strong>{" "}
-                    <a href="mailto:angelbudo4@gmail.com" className="underline text-primary">angelbudo4@gmail.com</a>
+                    <a href="mailto:trucvalencia@gmail.com" className="underline text-primary">trucvalencia@gmail.com</a>
                   </li>
                   <li><strong>Aplicación:</strong> Truc Valencià</li>
                 </ul>
@@ -168,7 +168,7 @@ const AvisLegal = () => {
                 <p>
                   Para cualquier consulta legal, solicitud o reporte, puedes
                   escribir a{" "}
-                  <a href="mailto:angelbudo4@gmail.com" className="underline text-primary">angelbudo4@gmail.com</a>.
+                  <a href="mailto:trucvalencia@gmail.com" className="underline text-primary">trucvalencia@gmail.com</a>.
                 </p>
               </section>
             </>
@@ -186,7 +186,7 @@ const AvisLegal = () => {
                   <li><strong>Titular:</strong> Ángel Pérez Lara</li>
                   <li><strong>NIF:</strong> 53361351V</li>
                   <li><strong>Correu de contacte:</strong>{" "}
-                    <a href="mailto:angelbudo4@gmail.com" className="underline text-primary">angelbudo4@gmail.com</a>
+                    <a href="mailto:trucvalencia@gmail.com" className="underline text-primary">trucvalencia@gmail.com</a>
                   </li>
                   <li><strong>Aplicació:</strong> Truc Valencià</li>
                 </ul>
@@ -288,7 +288,7 @@ const AvisLegal = () => {
                 <p>
                   Per a qualsevol consulta legal, sol·licitud o report, pots
                   escriure a{" "}
-                  <a href="mailto:angelbudo4@gmail.com" className="underline text-primary">angelbudo4@gmail.com</a>.
+                  <a href="mailto:trucvalencia@gmail.com" className="underline text-primary">trucvalencia@gmail.com</a>.
                 </p>
               </section>
             </>
