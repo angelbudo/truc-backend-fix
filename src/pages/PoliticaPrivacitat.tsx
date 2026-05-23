@@ -251,7 +251,7 @@ const PoliticaPrivacitat = () => {
                   <p className="mt-2">
                     La vinculació és <strong>voluntària</strong>. Pots continuar jugant sense facilitar
                     correu ni nom d'usuari. Si vincules el compte, pots desvincular-lo o eliminar-lo
-                    en qualsevol moment des d'<em>Ajustes</em>.
+                    en qualsevol moment des de <em>Configuració</em>.
                   </p>
                   <p className="mt-2">
                     <strong>Base legal</strong> d'aquest tractament: el teu consentiment exprés en
