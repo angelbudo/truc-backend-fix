@@ -224,7 +224,7 @@ const PoliticaPrivacitat = () => {
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Quines dades tractem</h2>
                 <p>
                   Jugar a l'app <strong>no requereix registre obligatori</strong>. Les dades que es tracten
-                  són mínimes i, en la seua majoria, no surten del teu dispositiu:
+                  són mínimes i, en la seua majoria, no ixen del teu dispositiu:
                 </p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li><strong>Sobrenom (àlies)</strong>: el text que tu mateix escrius per identificar-te a la mesa.</li>
@@ -235,7 +235,7 @@ const PoliticaPrivacitat = () => {
                 </ul>
                 <p className="text-sm text-muted-foreground">No fem servir cookies de seguiment, ni publicitat, ni eines d'analítica de tercers.</p>
 
-                <p className="font-bold">
+                <p className="font-bold mt-2">
                   Compte vinculat (opcional)</p>
                   <p>
                     Per a poder <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>,
