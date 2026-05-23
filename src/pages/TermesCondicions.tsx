@@ -62,6 +62,27 @@ const TermesCondicions = () => {
                 </p>
               </section>
 
+              <section className="mt-6 text-red-500 border border-red-500/40 rounded-md p-3">
+                <h2 className="font-display font-bold text-xl mt-2 mb-2 text-red-500">1 bis. Cuenta vinculada y nombre de usuario (opcional)</h2>
+                <p>
+                  Jugar al Truc Valencià <strong>no requiere crear cuenta</strong>. Si quieres{" "}
+                  <strong>guardar tu progreso y sincronizarlo entre dispositivos</strong>, puedes
+                  vincular una cuenta facilitando un <strong>correo electrónico</strong> (o iniciando
+                  sesión con Google/Apple) y eligiendo un <strong>nombre de usuario público</strong>.
+                </p>
+                <ul className="list-disc pl-6 my-2 space-y-1">
+                  <li>Debes facilitar un correo del que seas titular. Está prohibido usar correos de terceros sin su consentimiento.</li>
+                  <li>El nombre de usuario es <strong>único</strong>, visible para el resto de jugadores y debe respetar las mismas reglas que el sobrenombre (no insultos, no suplantación, no contenidos ofensivos, no datos personales).</li>
+                  <li>Nos reservamos el derecho de <strong>renombrar o bloquear</strong> nombres de usuario que incumplan estas reglas o que suplanten marcas, personas reales o personajes públicos.</li>
+                  <li>Una cuenta vinculada es <strong>personal e intransferible</strong>. No compartas tus credenciales.</li>
+                  <li>Puedes <strong>desvincular o eliminar tu cuenta</strong> en cualquier momento desde <em>Ajustes</em>, conservando o borrando tus datos según escojas.</li>
+                </ul>
+                <p>
+                  El tratamiento del correo y del nombre de usuario se detalla en la{" "}
+                  <Link to="/privacitat" className="underline">Política de Privacidad</Link>.
+                </p>
+              </section>
+
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Uso permitido</h2>
                 <ul className="list-disc pl-6 my-3 space-y-1">
@@ -188,6 +209,27 @@ const TermesCondicions = () => {
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Ús permès, xat i moderació</h2>
                 <p>Ús personal i lúdic. Cal sobrenom respectuós. Prohibits insults, assetjament, spam i suplantació. Reservem el dret de retirar missatges i bloquejar dispositius.</p>
+              </section>
+
+              <section className="mt-6 text-red-500 border border-red-500/40 rounded-md p-3">
+                <h2 className="font-display font-bold text-xl mt-2 mb-2 text-red-500">2 bis. Compte vinculat i nom d'usuari (opcional)</h2>
+                <p>
+                  Jugar al Truc Valencià <strong>no requereix crear compte</strong>. Si vols{" "}
+                  <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>, pots
+                  vincular un compte facilitant un <strong>correu electrònic</strong> (o iniciant
+                  sessió amb Google/Apple) i triant un <strong>nom d'usuari públic</strong>.
+                </p>
+                <ul className="list-disc pl-6 my-2 space-y-1">
+                  <li>Cal facilitar un correu del qual sigues titular. Està prohibit usar correus de tercers sense el seu consentiment.</li>
+                  <li>El nom d'usuari és <strong>únic</strong>, visible per a la resta de jugadors i ha de respectar les mateixes regles que el sobrenom (sense insults, sense suplantació, sense contingut ofensiu, sense dades personals).</li>
+                  <li>Ens reservem el dret de <strong>reanomenar o bloquejar</strong> noms d'usuari que incompleixen aquestes regles o que suplanten marques, persones reals o personatges públics.</li>
+                  <li>Un compte vinculat és <strong>personal i intransferible</strong>.</li>
+                  <li>Pots <strong>desvincular o eliminar el compte</strong> en qualsevol moment des d'<em>Ajustes</em>.</li>
+                </ul>
+                <p>
+                  El tractament del correu i del nom d'usuari es detalla a la{" "}
+                  <Link to="/privacitat" className="underline">Política de Privacitat</Link>.
+                </p>
               </section>
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">3. Limitació de responsabilitat</h2>

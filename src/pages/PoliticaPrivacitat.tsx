@@ -72,9 +72,8 @@ const PoliticaPrivacitat = () => {
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Qué datos tratamos</h2>
                 <p>
-                  <strong>No pedimos nombre real, email, teléfono ni ningún dato de contacto.</strong>{" "}
-                  No hay registro de usuarios. Los datos tratados son mínimos y, en su mayoría, no
-                  salen de tu dispositivo:
+                  Jugar a la app <strong>no requiere registro obligatorio</strong>. Los datos tratados son
+                  mínimos y, en su mayoría, no salen de tu dispositivo:
                 </p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li><strong>Sobrenombre (alias)</strong>: el texto que tú mismo escribes para identificarte en la mesa. Puedes poner lo que quieras; no se verifica ni se asocia a ninguna identidad real.</li>
@@ -84,6 +83,30 @@ const PoliticaPrivacitat = () => {
                   <li><strong>Estado de la partida online</strong>: cartas, acciones y mensajes del chat de la sala. Necesario para que el resto de jugadores vea la partida en tiempo real. Se borra automáticamente al finalizar (ver apartado 5).</li>
                 </ul>
                 <p className="text-sm text-muted-foreground">No usamos cookies de seguimiento, ni publicidad, ni herramientas de analítica de terceros.</p>
+
+                <div className="text-red-500 mt-4 border border-red-500/40 rounded-md p-3">
+                  <p className="font-bold mb-2">Actualización — Cuenta vinculada (opcional)</p>
+                  <p>
+                    Para poder <strong>guardar el progreso y sincronizarlo entre dispositivos</strong>,
+                    la app permite vincular una cuenta. Si decides hacerlo, se tratan estos datos
+                    adicionales:
+                  </p>
+                  <ul className="list-disc pl-6 mt-2 space-y-1">
+                    <li><strong>Correo electrónico</strong>: se utiliza únicamente como identificador de la cuenta y para enviar correos de verificación o recuperación. No se usa para publicidad ni se cede a terceros.</li>
+                    <li><strong>Nombre de usuario público</strong>: nombre único elegido por ti que te identificará ante el resto de jugadores (estadísticas, clasificaciones, invitaciones).</li>
+                    <li><strong>Datos de autenticación del proveedor</strong> (si vinculas con Google o Apple): identificador de la cuenta del proveedor para validar el inicio de sesión.</li>
+                  </ul>
+                  <p className="mt-2">
+                    La vinculación es <strong>voluntaria</strong>. Puedes seguir jugando sin facilitar
+                    correo ni nombre de usuario. Si vinculas la cuenta, puedes desvincularla o
+                    eliminarla en cualquier momento desde <em>Ajustes</em>.
+                  </p>
+                  <p className="mt-2">
+                    <strong>Base legal</strong> de este tratamiento: tu consentimiento expreso al
+                    crear o vincular la cuenta (art. 6.1.a RGPD) y la ejecución del servicio
+                    solicitado (art. 6.1.b RGPD).
+                  </p>
+                </div>
               </section>
 
               <section className="mt-6">
@@ -201,9 +224,8 @@ const PoliticaPrivacitat = () => {
               <section className="mt-6">
                 <h2 className="font-display font-bold text-xl mt-4 mb-2">2. Quines dades tractem</h2>
                 <p>
-                  <strong>No demanem nom real, email, telèfon ni cap dada de contacte.</strong> No hi ha
-                  registre d'usuaris. Les dades que es tracten són mínimes i, en la seua majoria, no surten
-                  del teu dispositiu:
+                  Jugar a l'app <strong>no requereix registre obligatori</strong>. Les dades que es tracten
+                  són mínimes i, en la seua majoria, no surten del teu dispositiu:
                 </p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li><strong>Sobrenom (àlies)</strong>: el text que tu mateix escrius per identificar-te a la mesa.</li>
@@ -213,6 +235,30 @@ const PoliticaPrivacitat = () => {
                   <li><strong>Estat de la partida online</strong>: necessari perquè la resta de jugadors veja la partida en temps real.</li>
                 </ul>
                 <p className="text-sm text-muted-foreground">No fem servir cookies de seguiment, ni publicitat, ni eines d'analítica de tercers.</p>
+
+                <div className="text-red-500 mt-4 border border-red-500/40 rounded-md p-3">
+                  <p className="font-bold mb-2">Actualització — Compte vinculat (opcional)</p>
+                  <p>
+                    Per a poder <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>,
+                    l'app permet vincular un compte. Si decideixes fer-ho, es tracten aquestes dades
+                    addicionals:
+                  </p>
+                  <ul className="list-disc pl-6 mt-2 space-y-1">
+                    <li><strong>Correu electrònic</strong>: s'utilitza únicament com a identificador del compte i per a enviar correus de verificació o recuperació. No es fa servir per a publicitat ni es cedeix a tercers.</li>
+                    <li><strong>Nom d'usuari públic</strong>: nom únic triat per tu que t'identificarà davant la resta de jugadors (estadístiques, classificacions, invitacions).</li>
+                    <li><strong>Dades d'autenticació del proveïdor</strong> (si vincules amb Google o Apple): identificador del compte del proveïdor per a validar l'inici de sessió.</li>
+                  </ul>
+                  <p className="mt-2">
+                    La vinculació és <strong>voluntària</strong>. Pots continuar jugant sense facilitar
+                    correu ni nom d'usuari. Si vincules el compte, pots desvincular-lo o eliminar-lo
+                    en qualsevol moment des d'<em>Ajustes</em>.
+                  </p>
+                  <p className="mt-2">
+                    <strong>Base legal</strong> d'aquest tractament: el teu consentiment exprés en
+                    crear o vincular el compte (art. 6.1.a RGPD) i l'execució del servei sol·licitat
+                    (art. 6.1.b RGPD).
+                  </p>
+                </div>
               </section>
 
               <section className="mt-6">
