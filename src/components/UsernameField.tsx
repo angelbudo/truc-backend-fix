@@ -60,7 +60,7 @@ export function UsernameField({
     setSaving(true);
     try {
       await setUsername(draft);
-      toast.success("Nom d'usuari desat");
+      toast.success("Nom d'usuari guardat");
       setEditing(false);
       onSaved();
     } catch (e) {
