@@ -84,7 +84,7 @@ const PoliticaPrivacitat = () => {
                 </ul>
                 <p className="text-sm text-muted-foreground">No usamos cookies de seguimiento, ni publicidad, ni herramientas de analítica de terceros.</p>
 
-                  <p className="font-bold mb-2">
+                  <p className="font-bold">
                     Cuenta vinculada (opcional)</p>
                   <p>
                     Para poder <strong>guardar el progreso y sincronizarlo entre dispositivos</strong>,
@@ -235,7 +235,7 @@ const PoliticaPrivacitat = () => {
                 </ul>
                 <p className="text-sm text-muted-foreground">No fem servir cookies de seguiment, ni publicitat, ni eines d'analítica de tercers.</p>
 
-                <p className="font-bold mb-2">
+                <p className="font-bold">
                   Compte vinculat (opcional)</p>
                   <p>
                     Per a poder <strong>guardar el progrés i sincronitzar-lo entre dispositius</strong>,
