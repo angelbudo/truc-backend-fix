@@ -364,7 +364,7 @@ const Reportar = () => {
 
   return (
     <main className="min-h-screen px-5 py-8 bg-background text-foreground">
-      <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
+      <div className="w-full max-w-lg flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <ShareAppButton />
             <Button
