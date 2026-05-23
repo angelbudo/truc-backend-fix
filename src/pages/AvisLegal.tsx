@@ -31,22 +31,20 @@ const AvisLegal = () => {
 
   return (
     <main className="min-h-screen px-5 py-8 bg-background text-foreground">
-      <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
-        <header className="flex items-center justify-between gap-3">
-          <div className="flex items-center justify-between">
-            <ShareAppButton />
-            <Button
-              onClick={() => navigate("/")}
-              size="sm"
-              variant="outline"
-              className="h-8 w-8 p-0 border-foreground/80 text-foreground hover:bg-foreground/10"
-              aria-label={t("common.back_home")}
-              title={t("common.back_home")}
-            >
-              <LogOut className="w-4 h-4" />
-            </Button>
-          </div>
-        </header>
+      <div className="w-full max-w-lg flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <ShareAppButton />
+          <Button
+            onClick={() => navigate("/")}
+            size="sm"
+            variant="outline"
+            className="h-8 w-8 p-0 border-foreground/80 text-foreground hover:bg-foreground/10"
+            aria-label={t("common.back_home")}
+            title={t("common.back_home")}
+          >
+            <LogOut className="w-4 h-4" />
+          </Button>
+        </div>
 
         <article className="prose prose-sm md:prose-base max-w-none text-foreground">
           <p className="text-xs text-muted-foreground">{isEs ? "Actualizado" : "Actualitzat"}: {lastUpdate}</p><br/>
