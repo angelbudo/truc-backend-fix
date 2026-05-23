@@ -33,7 +33,6 @@ const AvisLegal = () => {
     <main className="min-h-screen px-5 py-8 bg-background text-foreground">
       <div className="w-full max-w-2xl mx-auto flex flex-col gap-6">
         <header className="flex items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground">{isEs ? "Actualizado" : "Actualitzat"}: {lastUpdate}</p>
           <div className="flex items-center justify-between">
             <ShareAppButton />
             <Button
@@ -47,6 +46,7 @@ const AvisLegal = () => {
               <LogOut className="w-4 h-4" />
             </Button>
           </div>
+          <p className="text-xs text-muted-foreground">{isEs ? "Actualizado" : "Actualitzat"}: {lastUpdate}</p>
         </header>
 
         <article className="prose prose-sm md:prose-base max-w-none text-foreground">
