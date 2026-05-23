@@ -194,7 +194,7 @@ const PoliticaPrivacitat = () => {
                 </p>
                 <ul className="list-disc pl-6 my-3 space-y-1">
                   <li><strong>Dentro de la app</strong>: <em>Configuración → Privacidad y datos → Borrar mis datos</em>. Borra datos del servidor y locales en un solo paso.</li>
-                  <li><strong>Página pública</strong>: <a href="/esborrar-dades" className="underline text-primary">/esborrar-dades</a>. Permite solicitarlo desde un navegador, aunque ya no tengas la app instalada, indicando el identificador anónimo del dispositivo.</li>
+                  <li><strong>Página pública</strong>: <a href="/esborrar-dades" className="underline text-primary">/borrar-datos</a>. Permite solicitarlo desde un navegador, aunque ya no tengas la app instalada, indicando el identificador anónimo del dispositivo.</li>
                 </ul>
                 <p className="text-sm text-muted-foreground">
                   Categorías de datos procesados según el Data Safety form de Google Play: <em>App activity</em>{" "}
