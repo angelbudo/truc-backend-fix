@@ -648,6 +648,66 @@ async function startMatch(input: z.infer<typeof StartMatchSchema>) {
 }
 
 // ---------------------------------------------------------------------------
+// Chat — frases predefinidas y texto libre
+// ---------------------------------------------------------------------------
+
+const SendChatPhraseSchema = z.object({
+  roomId: z.string().uuid(),
+  deviceId: z.string().min(1),
+  phraseId: z.string().min(1).max(80),
+});
+
+async function findPlayerSeat(
+  roomId: string,
+  deviceId: string,
+): Promise<number> {
+  const { data, error } = await supabase
+    .from("room_players")
+    .select("seat")
+    .eq("room_id", roomId)
+    .eq("device_id", deviceId)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  if (!data) throw new Error("not_in_room");
+  return data.seat as number;
+}
+
+async function sendChatPhrase(input: z.infer<typeof SendChatPhraseSchema>) {
+  const room = await fetchRoomById(input.roomId);
+  if (!room) throw new Error("room_not_found");
+  const seat = await findPlayerSeat(input.roomId, input.deviceId);
+  const { error } = await supabase.from("room_chat").insert({
+    room_id: input.roomId,
+    seat,
+    phrase_id: input.phraseId,
+  });
+  if (error) throw new Error(error.message);
+  return { ok: true as const };
+}
+
+const SendTextMessageSchema = z.object({
+  roomId: z.string().uuid(),
+  deviceId: z.string().min(1),
+  text: z.string().min(1).max(240),
+});
+
+async function sendTextMessage(input: z.infer<typeof SendTextMessageSchema>) {
+  const room = await fetchRoomById(input.roomId);
+  if (!room) throw new Error("room_not_found");
+  const seat = await findPlayerSeat(input.roomId, input.deviceId);
+  const text = input.text.trim();
+  if (!text) throw new Error("empty_text");
+  const { error } = await supabase.from("room_text_chat").insert({
+    room_id: input.roomId,
+    seat,
+    device_id: input.deviceId,
+    text,
+  });
+  if (error) throw new Error(error.message);
+  return { ok: true as const };
+}
+
+// ---------------------------------------------------------------------------
 // Stubs para fases siguientes
 // ---------------------------------------------------------------------------
 const notImplemented = async () => {
@@ -692,8 +752,8 @@ const handlers: Record<string, Handler> = {
   adminCloseRoom: withSchema(AdminCloseSchema, adminCloseRoom),
 
   // Fase 3 — chats y moderación
-  sendChatPhrase: notImplemented,
-  sendTextMessage: notImplemented,
+  sendChatPhrase: withSchema(SendChatPhraseSchema, sendChatPhrase),
+  sendTextMessage: withSchema(SendTextMessageSchema, sendTextMessage),
   flagPlayerInChat: notImplemented,
   adminListChatFlags: notImplemented,
   adminDecideChatFlag: notImplemented,
